@@ -1,0 +1,157 @@
+@media (hover: hover) {
+  .ssilo4ka:hover {
+    transform: scale(1.02);
+    opacity: 0.7;
+    transition: all 0.2s ease-in;
+  }
+  .slider-button.active:hover {
+    background: gold;
+    opacity: 0.8;
+    cursor: pointer !important;
+  }
+}
+.ssilo4ka {
+  color: white;
+}
+
+@media (max-width: 575px) {
+  .slider {
+    width: 100%;
+    height: 350px;
+  }
+  .slider-text {
+    top: 20% !important;
+    text-align: center !important;
+    left: 50% !important;
+    margin-top: 10px;
+    margin-right: 40px;
+  }
+  .slider-button {
+    left: 50% !important;
+  }
+  .this-is-1 {
+    width: 300px !important;
+    height: 150px !important;
+    top: 40%;
+  }
+  .this-is-2 {
+    width: 300px;
+    height: 100px;
+    bottom: 10%;
+  }
+}
+
+@media (min-width: 576px) {
+  .slider {
+    width: 100%;
+    height: 500px;
+  }
+  .slider-text {
+    line-height: 2;
+    margin-top: 30px;
+  }
+  .this-is-1 {
+    width: 300px !important;
+    left: 10%;
+  }
+  .this-is-2 {
+    width: 500px !important;
+    left: 30%;
+  }
+  .this-is-3 {
+    width: 400px !important;
+    height: 90% !important;
+    left: 20%;
+    top: 5%;
+  }
+}
+
+@media (max-width: 576px) {
+  .slider-button {
+    top: 85% !important;
+  }
+}
+@media (min-width: 1024px) {
+  .slider-text {
+    line-height: 5;
+    margin-top: 30px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .this-is-1 {
+    width: 300px !important;
+    left: 5%;
+  }
+}
+.slider {
+  position: relative;
+  overflow: hidden;
+  border: solid 2px;
+  border-radius: 20px;
+}
+
+.slider-img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+
+.slider-img.active {
+  opacity: 1;
+}
+
+.slider-controlls {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.slider-text {
+  position: absolute;
+  text-align: end;
+  top: 25%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  opacity: 0;
+}
+
+.slider-text.active {
+  opacity: 1;
+}
+
+.slider-button {
+  position: absolute;
+  top: 75%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  opacity: 0;
+}
+.slider-button.active {
+  opacity: 1;
+  z-index: 2;
+  background: gold;
+}
+
+.slider .prev {
+  width: 3rem;
+  left: 10px;
+}
+
+.slider .prev:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+.slider .next {
+  width: 3rem;
+  right: 10px;
+}
+
+.slider .next:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}

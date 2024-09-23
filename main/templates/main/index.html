@@ -1,0 +1,34 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block title %}
+    Главная страница
+{% endblock %}
+{% block content %}
+<p>Главная страница</p>
+<div class="container">
+    <h3 class="text-center">Создаем стиль</h3>
+    <div class="slider mb-2">
+        <div>
+            <h2 class="slider-text col-lg-12 col-md-12 col-sm-12" style="text-align:end;left:45%;">Магазин открылся<br>Приобретайте костюмы</h2>
+            <a class="slider-button btn orange_without" style="cursor:default;left:85%;" id="buy_1" data-href="{% url 'catalog' %}">Купить</a>
+            <img src="{% static 'style/img/cat1.png' %}" class="slider-img this-is-1" alt="Магазин открылся">
+        </div>
+        <div>
+            <h2 class="slider-text col-lg-12 col-md-12 col-sm-12" style="text-align:start;left:65%">Зайти в аккаунт</h2>
+            <a class="slider-button btn  orange_without" style="text-align:start;left:25%;cursor:default;" id="buy_2" data-href="">Авторизоваться</a>
+            <img src="{% static 'style/img/picture2.png' %}" class="slider-img this-is-2" alt="Авторизоваться">
+        </div>
+        <div>
+            <h2 class="slider-text col-lg-12 col-md-12 col-sm-12" style="text-align:end;left:45%;">Есть вопросы?</h2>
+            <a class="slider-button btn orange_without" style="cursor:default;left:85%;" id="buy_3" data-href="{% url 'contact' %}">Связаться</a>
+            <img src="{% static 'style/img/dydya.png' %}" class="slider-img this-is-3" alt="Вопросы">
+        </div>
+        <div>
+            <img class="prev controlls slider-controlls" src="{% static 'style/img/prev_icon.png' %}" alt="Перелистнуть влево">
+        </div>
+        <div>
+            <img class="next controlls slider-controlls" src="{% static 'style/img/next_icon.png' %}" alt="Перелистнуть вправо">
+        </div>
+    </div>
+</div>
+{% endblock %}
