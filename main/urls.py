@@ -9,5 +9,4 @@ urlpatterns = [
     path("", views.index, name="home"),
     path("catalog", views.catalog, name="catalog"),
     path("contact", views.contact, name="contact"),
-    path("user/", include("users.urls", namespace="user")),
 ]
