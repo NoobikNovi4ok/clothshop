@@ -57,21 +57,26 @@
         <label for={{field.name}}>{{ field.label }}</label>
 
       {% endif %}
-          {% if field.errors%}
-          {% for error in field.errors %}
-          <div class="alert alert-danger">
-              {{error}}
-          </div>
-          {% endfor %}
-          {% endif %}
       </div>
       {% endfor %}
       </div>
+      {% if form.non_field_errors%}
+      <div class="alert alert-danger">
+        {{ form.non_field_errors }}
+    </div>
+      {% endif %}
     <button class="btn btn-outline-light my-2" type="submit">Авторизоваться</button>
     <br>
     <a class="btn btn-outline-warning my-2" href={% url 'user:registration' %} style="white-space: normal;word-wrap: break-word;">Перейти на страницу регистрации</a>
 </form>
 <div id="error-messages"></div>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }} alert alert-success fade show"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 </div>
 </div>
 {% endblock %}

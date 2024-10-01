@@ -10,10 +10,11 @@ def registration(request):
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
+            user = form.save()
             messages.add_message(
                 request,
                 messages.INFO,
-                f'{form["name"]} вы успешно создали в аккаунт',
+                f"{user.name} вы успешно создали в аккаунт",
             )
             return HttpResponseRedirect(reverse("user:login"))
 

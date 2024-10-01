@@ -1,7 +1,11 @@
 import uuid
 from django.core.validators import RegexValidator
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 from django.core.exceptions import ValidationError
 
 
@@ -28,7 +32,7 @@ class CustomUserManager(BaseUserManager):
         return self.get(login=login)
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(
         max_length=50,
         validators=[
@@ -87,3 +91,9 @@ class User(AbstractBaseUser):
 
     def __str__(self):
         return f"{self.name}"
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
