@@ -3,5 +3,29 @@
 Каталог
 {% endblock %}
 {% block content %}
-<p>Каталог</p>
+<h1>Каталог</h1>
+
+<!-- Форма для фильтрации по категориям (если нужно) -->
+<form method="GET">
+    <select name="category" onchange="this.form.submit()">
+        <option value="0">Все категории</option>
+        {% for category in categories %}
+            <option value="{{ category.id }}" {% if category.id|stringformat:"d" == category %}selected{% endif %}>
+                {{ category.name }}
+            </option>
+        {% endfor %}
+    </select>
+</form>
+
+<ul>
+    {% for cloth in cloths %}
+        <li>
+            <h2>{{ cloth.name }}</h2>
+            <p>Цена: {{ cloth.price }} руб.</p>
+            <p>В наличии: {{ cloth.stock_quantity }}</p>
+        </li>
+    {% empty %}
+        <li>Товары отсутствуют</li>
+    {% endfor %}
+</ul>
 {% endblock %}

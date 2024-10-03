@@ -44,12 +44,12 @@ class Categories(models.Model):
 
 
 class Countries(models.Model):
-    name = models.CharField(max_length=50, verbose_name="Имя категории")
+    name = models.CharField(max_length=50, verbose_name="Название страны")
     slug = models.SlugField(max_length=100, unique=True, verbose_name="URL")
 
     class Meta:
-        verbose_name = "Категорию"
-        verbose_name_plural = "Категории"
+        verbose_name = "Страна"
+        verbose_name_plural = "Страны"
 
     def __str__(self):
         return f"{self.name}"
