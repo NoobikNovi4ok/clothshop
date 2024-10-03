@@ -143,13 +143,17 @@ class UserRegistrationForm(forms.ModelForm):
     def clean_name(self):
         name = self.cleaned_data["name"]
         if not re.match(r"^[а-яА-ЯёЁ\s-]+$", name):
-            raise ValidationError(_("Недопустимые символы в имени."))
+            raise ValidationError(
+                _("Имя может содержать только кириллицу, пробелы и тире.")
+            )
         return name
 
     def clean_surname(self):
         surname = self.cleaned_data["surname"]
         if not re.match(r"^[а-яА-ЯёЁ\s-]+$", surname):
-            raise ValidationError(_("Недопустимые символы в фамилии."))
+            raise ValidationError(
+                _("Фамилия может содержать только кириллицу, пробелы и тире.")
+            )
         return surname
 
     def clean_login(self):
@@ -159,7 +163,9 @@ class UserRegistrationForm(forms.ModelForm):
                 "Этот логин уже занят. Пожалуйста, введите другой."
             )
         if not re.match(r"^[a-zA-Z0-9-]+$", login):
-            raise ValidationError(_("Недопустимые символы в логине."))
+            raise ValidationError(
+                _("Логин может содержать только латиницу, пробелы и тире.")
+            )
         return login
 
     def clean_email(self):
