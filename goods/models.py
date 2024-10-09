@@ -72,6 +72,7 @@ class Cloths(models.Model):
     country = models.ForeignKey(
         to=Countries, on_delete=models.PROTECT, verbose_name="Страна"
     )
+    year = models.PositiveIntegerField(blank=True, null=True)
     sizes = models.ManyToManyField(Size, related_name="sizing_items")
     colors = models.ManyToManyField(Color, related_name="coloring_items")
 

@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from goods.models import Categories, Countries, Cloths
 
@@ -6,21 +7,60 @@ def index(request):
     return render(request, "main/index.html")
 
 
-def catalog(request):
-    categories = Categories.objects.all()
-    cloths = Cloths.objects.filter(quantity__gt=0)
-    category_id = request.GET.get("category", 0)
-    if category_id:
-        cloths = Cloths.objects.filter(category=category_id)
-    if category_id:
-        context = {
-            "cloths": cloths,
-            "categories": categories,
-            "category": category_id,
-        }
-    else:
-        context = {"cloths": cloths, "categories": categories}
+# def catalog(request):
+#     categories = Categories.objects.all()
+#     cloths = Cloths.objects.filter(quantity__gt=0)
+#     category_slug = request.GET.get("category", 0)
+#     if category_slug:
+#         category = Categories.objects.get(slug=category_slug)
+#         print(category)
+#         print(category.id)
+#         shmot = Cloths.objects.filter(category=category.id)
+#         print(shmot)
+#         if shmot:
+#             context = {
+#                 "cloths": shmot,
+#                 "categories": categories,
+#                 "category": category,
+#             }
+#             return render(request, "main/catalog.html", context)
+#         else:
+#             context = {"categories": categories}
+#     else:
+#         context = {
+#             "cloths": cloths,
+#             "categories": categories,
+#         }
+#     return render(request, "main/catalog.html", context)
 
+
+def catalog(request):
+    cloths = Cloths.objects.filter(quantity__gt=0)  # Показываем только доступные товары
+    categories = Categories.objects.all()
+
+    # Фильтрация по категории
+    category_slug = request.GET.get("category", 0)
+    if category_slug:
+        category = Categories.objects.get(slug=category_slug)
+        cloths = cloths.filter(category=category.id)
+
+    # Сортировка
+    sort_by = request.GET.get("sort", "newest")  # По умолчанию по новизне
+    if sort_by == "year":
+        cloths = cloths.order_by("-year")
+    elif sort_by == "name":
+        cloths = cloths.order_by("name")
+    elif sort_by == "price":
+        cloths = cloths.order_by("cost")
+    else:
+        cloths = cloths.order_by("-pk")  # По новизне (по ID)
+
+    context = {
+        "cloths": cloths,
+        "categories": categories,
+        "selected_category": category_slug,
+        "selected_sort": sort_by,
+    }
     return render(request, "main/catalog.html", context)
 
 

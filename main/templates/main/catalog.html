@@ -1,31 +1,109 @@
 {% extends 'main/layout.html' %}
+{% load static %}
 {% block title %}
 Каталог
 {% endblock %}
 {% block content %}
-<h1>Каталог</h1>
+{% comment %} <h1>Каталог</h1>
 
 <!-- Форма для фильтрации по категориям (если нужно) -->
 <form method="GET">
     <select name="category" onchange="this.form.submit()">
         <option value="0">Все категории</option>
         {% for category in categories %}
-            <option value="{{ category.id }}" {% if category.id|stringformat:"d" == category %}selected{% endif %}>
+            <option value="{{ category.slug }}" {% if category.id|stringformat:"d" == category %}selected{% endif %}>
                 {{ category.name }}
             </option>
-        {% endfor %}
+            {% endfor %}
     </select>
 </form>
 
 <ul>
-    {% for cloth in cloths %}
-        <li>
-            <h2>{{ cloth.name }}</h2>
-            <p>Цена: {{ cloth.price }} руб.</p>
-            <p>В наличии: {{ cloth.stock_quantity }}</p>
-        </li>
-    {% empty %}
+    {% if category %}
+        {% if cloths %}
+            {% for cloth in cloths %}
+                <li>
+                    <h2>{{ cloth.name }}</h2>
+                    <p>Цена: {{ cloth.price }} руб.</p>
+                    <p>В наличии: {{ cloth.stock_quantity }}</p>
+                </li>
+            {% empty %}
+                <li>Товары отсутствуют</li>
+            {% endfor %}
+        {% else %}
         <li>Товары отсутствуют</li>
-    {% endfor %}
-</ul>
+        {% endif %}
+    {% else %}
+        {% for cloth in cloths %}
+            <li>
+                <h2>{{ cloth.name }}</h2>
+                <p>Цена: {{ cloth.price }} руб.</p>
+                <p>В наличии: {{ cloth.stock_quantity }}</p>
+            </li>
+        {% empty %}
+            <li>Товары отсутствуют</li>
+        {% endfor %}
+    {% endif %}
+</ul> {% endcomment %}
+
+<h1>Каталог товаров</h1>
+
+    {% comment %} <div>
+        <h2>Фильтр по категориям</h2>
+        <ul>
+            {% for category in categories %}
+                <li>
+                    <a href="?category={{ category.slug }}&sort={{ selected_sort }}{% if selected_category == category.id %}&selected=true{% endif %}">{{ category.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div> {% endcomment %}
+
+    <form action="{% url 'catalog' %}" method="get">
+        <div class="dropdown mb-1">
+            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu1"
+                data-bs-toggle="dropdown" aria-haspopup="true" data-bs-auto-close="false" aria-expanded="true">
+                Категории товаров
+            </button>
+            <div class="dropdown-menu" style="padding:0;" aria-labelledby="dropdownMenu1">
+                {% for category in categories %}
+                    <label class="text-center my-2 mx-2"><img src="{{category.icon.url}}" class="icon_plus" style="padding-right:5px;" alt="{{category.name}}"><input type="checkbox" name="category" value="{{ category.category_id }}" {% if category.category_id in select %} checked {% endif %}> {{ category.name }}</label><br><hr style="margin:0;">
+                {% endfor %}
+            </div>
+        </div>
+        <div class="dropdown mb-1">
+            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu1"
+                data-bs-toggle="dropdown" aria-haspopup="true" data-bs-auto-close="false" aria-expanded="true">
+                Сортировка
+            </button>
+            <div class="dropdown-menu" style="padding:0;" aria-labelledby="dropdownMenu1">
+                <label class="text-center my-2 mx-2"><input type="checkbox" name="sort" value="newest">По новизне</label><br><hr style="margin:0;">
+                <label class="text-center my-2 mx-2"><input type="checkbox" name="sort" value="year">По году производства</label><br><hr style="margin:0;">
+                <label class="text-center my-2 mx-2"><input type="checkbox" name="sort" value="name">По наименованию</label><br><hr style="margin:0;">
+                <label class="text-center my-2 mx-2"><input type="checkbox" name="sort" value="price">По цене</label><br><hr style="margin:0;">
+            </div>
+        </div>
+        <input type="submit" value="Показать" class="btn orange" style="background: rgba(255, 138, 0,0.5);">
+    <form>
+
+    {% comment %} <div>
+        <h2>Сортировка</h2>
+         <ul>
+            <li><a href="?sort=newest&category={{ selected_category }}">По новизне</a></li>
+            <li><a href="?sort=year&category={{ selected_category }}">По году производства</a></li>
+            <li><a href="?sort=name&category={{ selected_category }}">По наименованию</a></li>
+            <li><a href="?sort=price&category={{ selected_category }}">По цене</a></li>
+        </ul>
+    </div> {% endcomment %}
+
+    <div class="product-list">
+        {% for cloth in cloths %}
+            <div class="product-card">
+                <img src="{{ cloth.image.url }}" alt="{{ cloth.name }}">
+                <h3>{{ cloth.name }}</h3>
+                <p>Цена: {{ cloth.price }} ₽</p>
+                <a href=product/{{cloth.slug}}>Подробнее</a>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

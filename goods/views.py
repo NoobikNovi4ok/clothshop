@@ -7,4 +7,4 @@ def goods_get(request, slug):
     context = {
         "product": cloth,
     }
-    render(request, "goods/cloth.html", context)
+    return render(request, "goods/cloth.html", context)

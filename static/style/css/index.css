@@ -64,11 +64,19 @@
     left: 20%;
     top: 5%;
   }
+  .dropdown-menu.show {
+    width: 100%;
+  }
 }
 
 @media (max-width: 576px) {
   .slider-button {
     top: 85% !important;
+  }
+  .dropdown-menu.show {
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
   }
 }
 @media (min-width: 1024px) {
@@ -154,4 +162,10 @@
 .slider .next:hover {
   opacity: 0.7;
   cursor: pointer;
+}
+
+.dropdown-menu.show {
+  margin-bottom: 10px !important;
+  position: relative !important;
+  transform: none !important;
 }
