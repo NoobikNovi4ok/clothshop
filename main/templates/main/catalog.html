@@ -4,6 +4,10 @@
 Каталог
 {% endblock %}
 {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+
 {% comment %} <h1>Каталог</h1>
 
 <!-- Форма для фильтрации по категориям (если нужно) -->
@@ -67,7 +71,7 @@
             </button>
             <div class="dropdown-menu" style="padding:0;" aria-labelledby="dropdownMenu1">
                 {% for category in categories %}
-                    <label class="text-center my-2 mx-2"><img src="{{category.icon.url}}" class="icon_plus" style="padding-right:5px;" alt="{{category.name}}"><input type="checkbox" name="category" value="{{ category.category_id }}" {% if category.category_id in select %} checked {% endif %}> {{ category.name }}</label><br><hr style="margin:0;">
+                    <label class="text-center my-2 mx-2"><img src="{{category.icon.url}}" class="icon_plus" style="padding-right:5px; width:64px;height:64px;" alt="{{category.name}}"><input type="checkbox" name="category" value="{{ category.slug }}" {% if category in select_category %} checked {% endif %}> {{ category.name }}</label><br><hr style="margin:0;">
                 {% endfor %}
             </div>
         </div>
@@ -77,15 +81,14 @@
                 Сортировка
             </button>
             <div class="dropdown-menu" style="padding:0;" aria-labelledby="dropdownMenu1">
-                <label class="text-center my-2 mx-2"><input type="checkbox" name="sort" value="newest">По новизне</label><br><hr style="margin:0;">
-                <label class="text-center my-2 mx-2"><input type="checkbox" name="sort" value="year">По году производства</label><br><hr style="margin:0;">
-                <label class="text-center my-2 mx-2"><input type="checkbox" name="sort" value="name">По наименованию</label><br><hr style="margin:0;">
-                <label class="text-center my-2 mx-2"><input type="checkbox" name="sort" value="price">По цене</label><br><hr style="margin:0;">
+                <label class="text-center my-2 mx-2"><input type="checkbox" name="sort" value="year" {% if 'year' in request %} checked {% endif %}>По году производства</label><br><hr style="margin:0;">
+                <label class="text-center my-2 mx-2"><input type="checkbox" name="sort" value="name" {% if 'name' in request %} checked {% endif %}>По наименованию</label><br><hr style="margin:0;">
+                <label class="text-center my-2 mx-2"><input type="checkbox" name="sort" value="price" {% if 'price' in request %} checked {% endif %}>По цене</label><br><hr style="margin:0;">
             </div>
         </div>
-        <input type="submit" value="Показать" class="btn orange" style="background: rgba(255, 138, 0,0.5);">
+        <input type="submit" value="Показать" class="btn btn-outline-dark">
     <form>
-
+    </div>
     {% comment %} <div>
         <h2>Сортировка</h2>
          <ul>
@@ -95,15 +98,33 @@
             <li><a href="?sort=price&category={{ selected_category }}">По цене</a></li>
         </ul>
     </div> {% endcomment %}
-
-    <div class="product-list">
-        {% for cloth in cloths %}
-            <div class="product-card">
-                <img src="{{ cloth.image.url }}" alt="{{ cloth.name }}">
-                <h3>{{ cloth.name }}</h3>
-                <p>Цена: {{ cloth.price }} ₽</p>
-                <a href=product/{{cloth.slug}}>Подробнее</a>
+    <div class="col-lg-8 col-md-6 col-sm-12 catalog_tovarov">
+        <div class="row justify-content-between">
+            {% for cloth in cloths %}
+            <div class="card border-2 border-dark text-center" style="padding-left:0; padding-right:0px;">
+                <div class="card-body" data-href="product/{{ cloth.slug }}">
+                    <a href=product/{{cloth.slug}} style="text-decoration:none;">
+                    <img src="{{ cloth.photo.url }}" class="card-img p-3" alt="{{ cloth.name }}">
+                    <h3 class="card-title text-dark">{{ cloth.name }}</h3>
+                    <p class="card-text text-dark pb-1">Цена: {{ cloth.cost }} ₽</p>
+                    <a href=product/{{cloth.slug}} class="btn btn-outline-dark" style="text-decoration:none;">Подробнее</a>
+                    </a>
+                </div>
             </div>
-        {% endfor %}
+            </a>
+            {% endfor %}
+        </div>
     </div>
+    </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.card-body');
+        cards.forEach(card => {
+            card.addEventListener('click', function() {
+                window.location.href = card.getAttribute('data-href');
+            });
+        });
+    });
+</script>
 {% endblock %}

@@ -37,30 +37,43 @@ def index(request):
 def catalog(request):
     cloths = Cloths.objects.filter(quantity__gt=0)  # Показываем только доступные товары
     categories = Categories.objects.all()
+    reguest = request.GET.getlist('sort')
+    categorya = None
 
     # Фильтрация по категории
-    category_slug = request.GET.get("category", 0)
+    category_slug = request.GET.getlist("category", 0)
     if category_slug:
-        category = Categories.objects.get(slug=category_slug)
-        cloths = cloths.filter(category=category.id)
+        categorya = Categories.objects.filter(slug__in=category_slug)
+        cloths = cloths.filter(category__in=categorya)
+
 
     # Сортировка
-    sort_by = request.GET.get("sort", "newest")  # По умолчанию по новизне
+    sort_by = request.GET.get("sort", "newest")
+    cloths = cloths.order_by("-pk")
     if sort_by == "year":
         cloths = cloths.order_by("-year")
     elif sort_by == "name":
         cloths = cloths.order_by("name")
     elif sort_by == "price":
         cloths = cloths.order_by("cost")
-    else:
-        cloths = cloths.order_by("-pk")  # По новизне (по ID)
 
-    context = {
-        "cloths": cloths,
-        "categories": categories,
-        "selected_category": category_slug,
-        "selected_sort": sort_by,
-    }
+    if categorya is not None:
+        context = {
+            "select_category":categorya,
+            "cloths": cloths,
+            "categories": categories,
+            "selected_category": category_slug,
+            "selected_sort": sort_by,
+            "request": reguest,
+        }
+    else:
+        context = {
+            "cloths": cloths,
+            "categories": categories,
+            "selected_category": category_slug,
+            "selected_sort": sort_by,
+            "request": reguest,
+        }
     return render(request, "main/catalog.html", context)
 
 

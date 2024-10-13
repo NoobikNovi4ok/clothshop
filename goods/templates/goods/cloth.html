@@ -1,1 +1,36 @@
 {% extends 'main/layout.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+<h1>{{ product.name }}</h1>
+    <img src="{{ product.photo.url }}" alt="{{ product.name }}" style="width:25%;height:30%;">
+    <p style="text-wrap:balance;">{{ product.description }}</p>
+    <p>Страна производитель - {{ product.country }}</p>
+    <p>Год выпуска - {{ product.year }}</p>
+    <p>Категория - {{ product.category }}</p>
+    <p>Цена: {{ product.cost }}₽</p>
+
+    <h2>Выберите размер:</h2>
+    <select id="size-select">
+        {% for size in sizes %}
+            <option value="{{ size.size_label }}">{{ size.size_label }}</option>
+        {% endfor %}
+    </select>
+
+    <h2>Выберите цвет:</h2>
+    <select id="color-select">
+        {% for color in colors %}
+            <option value="{{ color.color_label }}">{{ color.color_label }}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <button class="btn btn-warning my-2" id="add-to-cart">В корзину</button>
+</div>
+    <script>
+        document.getElementById('add-to-cart').onclick = function() {
+            const selectedSize = document.getElementById('size-select').value;
+            const selectedColor = document.getElementById('color-select').value;
+            alert(Вы добавили ${selectedSize} - ${selectedColor} в корзину!);
+        };
+    </script>
+{% endblock %}

@@ -39,6 +39,21 @@
     height: 100px;
     bottom: 10%;
   }
+  .catalog_tovarov{
+    margin-top:10px;
+  }
+  .slider-button {
+    top: 85% !important;
+  }
+  .dropdown-menu.show {
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .card-img{
+    width:140px;
+    height:140px;
+}
 }
 
 @media (min-width: 576px) {
@@ -67,18 +82,15 @@
   .dropdown-menu.show {
     width: 100%;
   }
+  .catalog_tovarov{
+    margin-top:20px;
+  }
+  .card-img{
+    width:180px;
+    height:180px;
+}
 }
 
-@media (max-width: 576px) {
-  .slider-button {
-    top: 85% !important;
-  }
-  .dropdown-menu.show {
-    width: 70%;
-    margin-right: auto;
-    margin-left: auto;
-  }
-}
 @media (min-width: 1024px) {
   .slider-text {
     line-height: 5;
@@ -169,3 +181,22 @@
   position: relative !important;
   transform: none !important;
 }
+
+.card {
+  width:18rem;
+  border-radius: 30px;
+  border: solid 1px;
+  transition: all 2s ease-in;
+  margin-bottom: 20px;
+}
+
+.card > :hover {
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.2);
+}
+
+.card a:hover {
+  transform: scale(1.04);
+}
+
