@@ -1,0 +1,12 @@
+[
+  {
+    "model": "goods.countries",
+    "pk": 1,
+    "fields": { "name": "Шри-Ланка", "slug": "shri-lanka" }
+  },
+  {
+    "model": "goods.countries",
+    "pk": 2,
+    "fields": { "name": "Россия", "slug": "rossiya" }
+  }
+]

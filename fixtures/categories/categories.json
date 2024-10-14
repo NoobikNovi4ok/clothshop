@@ -1,0 +1,20 @@
+[
+  {
+    "model": "goods.categories",
+    "pk": 1,
+    "fields": {
+      "name": "Костюмы",
+      "slug": "kostyumy",
+      "icon": "icon_category/icon_costume_MPpIFH5.png"
+    }
+  },
+  {
+    "model": "goods.categories",
+    "pk": 2,
+    "fields": {
+      "name": "Брюки",
+      "slug": "bryuki",
+      "icon": "icon_category/icon_bruki_hGLLiMq.png"
+    }
+  }
+]

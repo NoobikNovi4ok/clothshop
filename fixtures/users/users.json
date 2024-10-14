@@ -1,0 +1,20 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$mmKMLGgaIyxr4ZU5JzN9ZU$Xs7NX+Dv6TC7zv9NRusnS3YJ9BMbAnLgmWutjX30mbM=",
+      "last_login": "2024-10-14T08:05:52.857Z",
+      "name": "Даниил",
+      "surname": "Казаков",
+      "patronymic": "",
+      "login": "admin",
+      "email": "superuser_98fb45@example.com",
+      "is_active": true,
+      "is_staff": true,
+      "is_superuser": true,
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]
