@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from goods.models import Products
+from goods.models import Cloths
 from basket.models import Basket
 from django.template.loader import render_to_string
 from basket.utils import get_user_basket
@@ -8,7 +8,7 @@ from basket.utils import get_user_basket
 
 def basket_add(request):
     product_id = request.POST.get("product_id")
-    product = Products.objects.get(product_id=product_id)
+    product = Cloths.objects.get(pk=product_id)
 
     baskets = Basket.objects.filter(user=request.user, product=product)
 

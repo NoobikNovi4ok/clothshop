@@ -8,8 +8,8 @@ urlpatterns = [
     path("", include("main.urls")),
     path("user/", include("users.urls", namespace="user")),
     path("product/", include("goods.urls")),
-    path("basket/", include("basket.urls", namespace="basket")),
-    path("orders/", include("orders.urls", namespace="orders")),
+    path("basket/", include(("basket.urls", "basket"), namespace="basket")),
+    path("orders/", include(("orders.urls", "orders"), namespace="orders")),
 ]
 
 if settings.DEBUG:

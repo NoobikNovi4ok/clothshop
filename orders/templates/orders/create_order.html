@@ -1,0 +1,68 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block title %}
+Оформление заказа
+{% endblock %}
+{% block content %}
+<div class="container">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-danger fade show">{{message}}</div>
+    {% endfor %}
+    {% endif %}
+            <div class="row mt-1">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <!-- Контент на странице -->
+                    <div class=" bg-white mb-4 mx-2 rounded custom-shadow">
+                        <div class="container">
+                            <h3 class="text-center mb-4">Выбранные товары</h3>
+                            <div class="container" id="cart-items-container">
+                                <!-- Разметка корзины -->
+                                    {% include "basket/includes/included_cart.html" %}
+                                <!-- Закончилась разметка корзины -->
+                            </div>
+                        </div>
+                        <!-- Детали заказа -->
+                        <div class="container">
+                            <h3 class="text-center">Детали заказа</h3>
+                            <div class="mb-3 col-lg-12 col-md-12 col-sm-12" style="border:1px solid;border-radius:30px;padding:20px;">
+                                <div class="card-body">
+                                    <form action="{% url 'orders:create_order' %}" method="post">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="id_first_name" class="form-label">Имя*:</label>
+                                                <input type="text" class="form-control" id="id_first_name"
+                                                    name="first_name" value="{% if form.first_name.value %}{{form.first_name.value}}{% endif %}" placeholder="Введите имя" required>
+                                                {% if form.first_name.errors %}
+                                                <div class="alert alert-danger fade show">{{form.first_name.errors}}</div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="id_last_name" class="form-label">Фамилия*:</label>
+                                                <input type="text" class="form-control" id="id_last_name" name="last_name" value="{% if form.last_name.value %}{{form.last_name.value}}{% endif %}" placeholder="Введите фамилию" required>
+                                                {% if form.last_name.errors %}
+                                                <div class="alert alert-danger fade show">{{form.last_name.errors}}</div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="id_phone_number" class="form-label">Номер телефона*:</label>
+                                                <input type="text" class="form-control" id="id_phone_number" name="phone_number"
+                                                    placeholder="В формате: XXX-XXX-XX-XX" value="{% if form.phone_number.value %}{{form.phone_number.value}}{% endif %}"
+                                                    required>
+                                                {% if form.phone_number.errors %}
+                                                <div class="alert alert-danger fade show">{{form.phone_number.errors}}</div>
+                                                {% endif %}
+                                            </div>
+
+                                        </div>
+                                        <button type="submit" class="btn btn-outline-info orange">Оформить заказ</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

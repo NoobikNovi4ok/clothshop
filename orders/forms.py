@@ -1,7 +1,7 @@
 from django import forms
 
 
-class OrderForm(forms.Form):
+class CreateOrderForm(forms.Form):
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={

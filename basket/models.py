@@ -14,6 +14,7 @@ class BasketQuerySet(models.QuerySet):
 
 
 class Basket(models.Model):
+    basket_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(
         to=User, on_delete=models.PROTECT, verbose_name="Пользователь"
     )
@@ -32,7 +33,7 @@ class Basket(models.Model):
     objects = BasketQuerySet().as_manager()
 
     def products_price(self):
-        return round(self.product.cost * self.quantity, 2)
+        return round(self.cloth.cost * self.quantity, 2)
 
     def __str__(self):
-        return f"Корзина {self.user.username} | Товар {self.product.name} | Количество {self.quantity}"
+        return f"Корзина {self.user.login} | Товар {self.cloth.name} | Количество {self.quantity}"

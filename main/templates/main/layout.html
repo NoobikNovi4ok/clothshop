@@ -49,6 +49,25 @@
         </div>
       </div>
     </header>
+    <div class="col-lg-6 col-md-6 col-sm-6">
+      <ul class="nav col-lg-12 col-md-12 col-sm-12 mx-auto my-2 my-md-1 search_ul_header" style="padding-right:0px;">
+          {% if user.is_authenticated %}
+          <li class="header_effect">
+              <a href="{% url 'user:users-basket' %}" class="nav-link text-dark">
+                  <img src="{% static './style/image/cart_icon.png' %}" class="d-block mx-auto icon_plus" alt="Корзина"/>
+                  Корзина
+              </a>
+          </li>
+          {% else %}
+              <li class="header_effect">
+              <a href="{% url 'user:login' %}" class="nav-link text-dark align-items-center text-center">
+                  <img src="{% static './style/image/user_icon.png' %}" class="d-block mx-auto icon_plus" alt="Иконка войти"/>
+                  Войти
+              </a>
+          </li>
+          {% endif %}
+      </ul>
+  </div>
     {% endblock %}
     {% block content %}
     {% endblock %}

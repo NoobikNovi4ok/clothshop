@@ -55,3 +55,7 @@ def login(request):
         form = UserLoginForm()
 
     return render(request, "users/login.html", {"form": form, "title": "Авторизация"})
+
+
+def users_basket(request):
+    return render(request, "users/users_basket.html")
