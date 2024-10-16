@@ -4270,9 +4270,8 @@ var catalog_message = document.getElementById("jq-notification");
 $(document).ready(function () {
   // берем в переменную элемент разметки с id jq-notification для оповещений от ajax
   var successMessage = $("#jq-notification");
-  console.log("1");
 
-  // // Ловим собыитие клика по кнопке добавить в корзину
+  // // Ловим событие клика по кнопке добавить в корзину
   $(document).on("click", ".add-to-cart", function (e) {
     //     // Блокируем его базовое действие
     e.preventDefault();
@@ -4398,8 +4397,6 @@ $(document).ready(function () {
     // Берем значение количества товара
     var currentValue = parseInt($input.val());
 
-    $input.val(currentValue + 1);
-
     // Запускаем функцию определенную ниже
     // с аргументами (id карты, новое количество, количество уменьшилось или прибавилось, url)
     updateCart(cartID, currentValue + 1, 1, url);
@@ -4420,12 +4417,10 @@ $(document).ready(function () {
     var quantity = parseInt($(this).val());
     // Вычисляем изменение количества
     var change = quantity - parseInt($(this).data("old-quantity"));
-
     // Запускаем функцию updateCart
     updateCart(cartID, quantity, change, url);
 
     // Обновляем значение старого количества
-    $(this).data("old-quantity", quantity);
   });
 
   function updateCart(cartID, quantity, change, url) {

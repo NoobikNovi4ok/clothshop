@@ -24,13 +24,16 @@
         {% endfor %}
     </select>
     <br>
-    <button class="btn btn-warning my-2" id="add-to-cart">В корзину</button>
+    {% if user.is_authenticated %}
+    {{product.id}}
+                    <a href="{% url 'basket:basket_add' %}" class="btn btn-outline-dark add-to-cart"
+                       data-product-id="{{ product.id }}">В корзину</a>
+                    {% csrf_token %}
+                    <div class="container">
+                      <div id="jq-notification" class="alert alert-success col-lg-3 col-md-6 col-sm-9 mt-1" style="display:none;visibility:hidden;"></div>
+                    </div>
+                    {% else %}
+                    <a href="{% url 'user:login' %}?message=1" class="btn btn-outline-dark">В корзину</a>
+                    {% endif %}
 </div>
-    <script>
-        document.getElementById('add-to-cart').onclick = function() {
-            const selectedSize = document.getElementById('size-select').value;
-            const selectedColor = document.getElementById('color-select').value;
-            alert(Вы добавили ${selectedSize} - ${selectedColor} в корзину!);
-        };
-    </script>
 {% endblock %}

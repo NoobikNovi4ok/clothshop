@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from goods.models import Cloths
@@ -10,7 +11,7 @@ def basket_add(request):
     product_id = request.POST.get("product_id")
     product = Cloths.objects.get(pk=product_id)
 
-    baskets = Basket.objects.filter(user=request.user, product=product)
+    baskets = Basket.objects.filter(user=request.user, cloth=product)
 
     if baskets.exists():
         basket = baskets.first()
@@ -18,7 +19,7 @@ def basket_add(request):
             basket.quantity += 1
             basket.save()
     else:
-        Basket.objects.create(user=request.user, product=product, quantity=1)
+        Basket.objects.create(user=request.user, cloth=product, quantity=1)
 
     user_basket = get_user_basket(request)
     cart_items_html = render_to_string(
@@ -41,9 +42,12 @@ def basket_change(request):
     if basket_id and quantity:
         try:
             cart_item = Basket.objects.get(pk=basket_id)
+            cloth = cart_item.cloth
         except Basket.DoesNotExist:
             return JsonResponse({"error": "Товар не найден"}, status=404)
 
+        if cloth.quantity < int(quantity):
+            return JsonResponse({"error": "Товара нет"}, status=404)
         cart_item.quantity += change  # Изменяем количество
         cart_item.save()
 

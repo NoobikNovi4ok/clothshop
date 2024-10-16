@@ -1,0 +1,22 @@
+[
+  {
+    "model": "goods.color",
+    "pk": 1,
+    "fields": { "color_label": "Red", "is_available": true }
+  },
+  {
+    "model": "goods.color",
+    "pk": 2,
+    "fields": { "color_label": "Black", "is_available": true }
+  },
+  {
+    "model": "goods.color",
+    "pk": 3,
+    "fields": { "color_label": "Grey", "is_available": true }
+  },
+  {
+    "model": "goods.color",
+    "pk": 4,
+    "fields": { "color_label": "Black", "is_available": true }
+  }
+]

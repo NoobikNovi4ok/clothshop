@@ -1,0 +1,22 @@
+[
+  {
+    "model": "goods.size",
+    "pk": 1,
+    "fields": { "size_label": "S", "is_available": true }
+  },
+  {
+    "model": "goods.size",
+    "pk": 2,
+    "fields": { "size_label": "XL", "is_available": true }
+  },
+  {
+    "model": "goods.size",
+    "pk": 3,
+    "fields": { "size_label": "L", "is_available": true }
+  },
+  {
+    "model": "goods.size",
+    "pk": 4,
+    "fields": { "size_label": "XL", "is_available": true }
+  }
+]
