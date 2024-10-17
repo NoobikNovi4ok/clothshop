@@ -21,13 +21,10 @@ def create_order(request):
                     if cart_items.exists():
                         order = Order.objects.create(
                             user=user,
-                            first_name=form.cleaned_data["first_name"],
-                            last_name=form.cleaned_data["last_name"],
-                            phone_number=form.cleaned_data["phone_number"],
                         )
                         for cart_item in cart_items:
-                            product = cart_item.product
-                            price = cart_item.product.cost
+                            product = cart_item.cloth
+                            price = cart_item.cloth.cost
                             quantity = cart_item.quantity
 
                             if product.quantity < quantity:
@@ -48,7 +45,7 @@ def create_order(request):
                         cart_items.delete()
 
                         messages.success(request, "Заказ оформлен")
-                        return redirect("user:profile")
+
             except ValidationError as e:
                 messages.success(request, str(e))
                 return redirect("orders:create_orders")

@@ -25,8 +25,7 @@
     </select>
     <br>
     {% if user.is_authenticated %}
-    {{product.id}}
-                    <a href="{% url 'basket:basket_add' %}" class="btn btn-outline-dark add-to-cart"
+                    <a href="{% url 'basket:basket_add' %}" class="btn btn-outline-dark add-to-cart mt-2"
                        data-product-id="{{ product.id }}">В корзину</a>
                     {% csrf_token %}
                     <div class="container">

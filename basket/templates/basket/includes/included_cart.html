@@ -11,7 +11,7 @@
     {% for cart in basket %}
     {% csrf_token %}
     <div class="card-header">
-        <a href="/product/{{cart.product.slug}}" class="card-title h5" style="text-decoration:none;">{{cart.product.name}}</a>
+        <a href="/product/{{cart.cloth.slug}}" class="card-title h5" style="text-decoration:none;">{{cart.cloth.name}}</a>
     </div>
     <ul class="list-group list-group-flush" style="padding-right:0;padding-left:0;">
         <li class="list-group-item">
