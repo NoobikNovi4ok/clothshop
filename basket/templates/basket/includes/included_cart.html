@@ -26,8 +26,10 @@
                         -</button>
                     </span>
                     <label>Кол-во товара
-                    <input type="number" class="form-control number" value="{{cart.quantity}}" min="1" 
-                    data-old-quantity="{{ cart.quantity }}" 
+                    <input type="number" class="form-control number" value="{{cart.quantity}}" min="1"
+                    data-old-quantity="{{ cart.quantity }}"
+                    max="{{ cart.cloth.quantity }}"
+                    data-max-quantity="{{ cart.max_quantity }}" 
                     data-cart-change-url="{% url 'basket:basket_change' %}" 
                     data-cart-id="{{ cart.basket_id }}">
                     </label>
@@ -60,7 +62,7 @@
 {% if basket %}
 <div class="column container row" style="padding-left:0;padding-right:0;">
     <div class="card mb-3 d-flex col-lg-3 col-md-6 col-sm-12">
-        <p class="float-left">Итого <strong>{{ basket.total_quantity }}</strong> товар(а) на сумму</p>
+        <p class="float-left" id="minecraft" data-max-count="{{ basket.total_quantity }}">Итого <strong>{{ basket.total_quantity }}</strong> товар(а) на сумму</p>
         <h4 class="float-left"><strong>{{ basket.total_price }} ₽</strong></h4>
     </div>
 </div>

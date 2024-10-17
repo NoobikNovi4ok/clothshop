@@ -4497,9 +4497,14 @@ $(document).ready(function () {
 
 $(document).on("input", ".number", function () {
   var inputValue = $(this).val();
-  console.log(inputValue);
-  if (inputValue !== "" && (inputValue <= 0 || inputValue.includes("."))) {
-    alert("Введите положительное целое число.");
+  var maxQuantity = parseInt($(this).attr("max"), 10);
+  if (
+    inputValue !== "" &&
+    (inputValue <= 0 || inputValue.includes(".") || inputValue > maxQuantity)
+  ) {
+    alert(
+      "Введите положительное целое число, не превышающее " + maxQuantity + "."
+    );
     $(this).val("");
   }
 });
