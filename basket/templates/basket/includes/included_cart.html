@@ -11,7 +11,7 @@
     {% for cart in basket %}
     {% csrf_token %}
     <div class="card-header">
-        <a href="/product/{{cart.product.slug}}" class="card-title h5" style="text-decoration:none;">{{cart.product.name}}</a>
+        <a href="/product/{{cart.cloth.slug}}" class="card-title h5" style="text-decoration:none;">{{cart.cloth.name}}</a>
     </div>
     <ul class="list-group list-group-flush" style="padding-right:0;padding-left:0;">
         <li class="list-group-item">
@@ -72,15 +72,15 @@
 {% else %}
 {% if request.path == basketi4 %}
 <div class="col-lg-4 col-md-6 col-sm-8" style="padding:0;margin:0;">
-    <a class="btn btn-outline-info orange" href="{% url 'orders:create_order' %}">
-        Оформить заказ
+    <a class="btn btn-outline-success orange" href="{% url 'orders:create_order' %}">
+        Сформировать заказ
     </a>
 </div>
 {% endif %}
 {% if find_search == basketi4 %}
 <div class="col-lg-4 col-md-6 col-sm-8" style="padding:0;margin:0;">
-    <a class="btn btn-outline-info orange" href="{% url 'orders:create_order' %}">
-        Оформить заказ
+    <a class="btn btn-outline-success orange" href="{% url 'orders:create_order' %}">
+        Сформировать заказ
     </a>
 </div>
 {% endif %}
@@ -89,7 +89,7 @@
 {% else %}
 <div class="col-lg-4 col-md-6 col-sm-8">
     <p>Корзина пуста</p>
-    <a class="btn btn-outline-info orange" href="{% url 'catalog' %}">
+    <a class="btn btn-outline-dark orange" href="{% url 'catalog' %}">
         Перейти в каталог
     </a>
 </div>
