@@ -17,3 +17,16 @@ class CreateOrderForm(forms.Form):
         error_messages={"required": "Это поле обязательно."},
         label="Пароль",
     )
+    login = forms.CharField(
+        widget=forms.HiddenInput(
+            attrs={
+                "class": "d-none",
+                "id": "login",
+                "name": "login",
+                "placeholder": "login",
+                "autocomplete": "login",
+            }
+        ),
+        required=True,
+        label="Пользователь",
+    )

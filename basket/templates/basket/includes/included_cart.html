@@ -11,7 +11,7 @@
     {% for cart in basket %}
     {% csrf_token %}
     <div class="card-header">
-        <a href="/product/{{cart.cloth.slug}}" class="card-title h5" style="text-decoration:none;">{{cart.cloth.name}}</a>
+        <a href="/product/{{cart.product.slug}}" class="card-title h5" style="text-decoration:none;">{{cart.product.name}}</a>
     </div>
     <ul class="list-group list-group-flush" style="padding-right:0;padding-left:0;">
         <li class="list-group-item">
@@ -50,7 +50,7 @@
                     <a href="{% url 'basket:basket_remove' %}" class="remove-from-cart"
                         data-cart-id="{{ cart.basket_id }}">
                         {% csrf_token %}
-                    <img src="{% static './style/image/trash_icon.png' %}"
+                    <img src="{% static './style/img/trash_icon.png' %}"
                     alt="Иконка мусорки" width="32" height="32">
                     </a>
                 </div>
