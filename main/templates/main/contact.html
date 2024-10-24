@@ -1,7 +1,70 @@
 {% extends 'main/layout.html' %}
+{% load static %}
 {% block title %}
 Контакты
 {% endblock %}
 {% block content %}
-<p>Контакты</p>
+<div class="container liquid">
+    <div class="row justify-content-between align-items-center mx-2">
+        <div class="col-sm-5 col-md-5 col-lg-5 contact_modal" style="border-radius:34px;border:solid 1px;padding:20px;">
+
+            <h3>Сотрудничество с поставщиками</h3>
+            <p style="margin-bottom:0;">Приглашаем к сотрудничеству корпоративных клиентов, оптовых покупателей,  а так же рестораны!
+<br/>Обращайтесь по телефону +7-499-450-80-90<br/>
+Или  на почту order@fb-st.ru</p>
+          </div>
+          <div class="col-sm-6 col-md-5 col-lg-5 contact_modal" style="border-radius:34px;border:solid 1px;padding:20px;">
+
+            <h3>График работы</h3>
+            <p style="margin-bottom:10px">Наши магазины расположены по всей России</p>
+            <p style="margin-bottom:10px;">Пн-чт : 8:00 - 19:00</p>
+            <p style="margin-bottom:10px;">Пт-сб : 9:00 - 18:00</p>
+            <p style="margin-bottom:0;">Воскресенье выходной</p>
+        </div>
+    </div>
+    </div>
+
+      <div class="container liquid-down">
+        <div class="row justify-content-between align-items-center mx-2">
+          <div class="col-sm-5 col-md-5 col-lg-5 contact_modal contact_modal_without" style="border-radius:34px;border:solid 1px;padding:20px;">
+
+            <h3>Сотрудничество со СМИ</h3>
+            <p>Если вы хотите написать про нас, организовать съемку или сделать репортаж – обращайтесь public@vkusvill.ru</p>
+          </div>
+          <div class="col-sm-6 col-md-5 col-lg-5 contact_modal contact_modal_without" style="border-radius:34px;border:solid 1px; padding:20px;">
+
+            <h3>Социальные сети</h3>
+            <p>Здесь появляются новости</p>
+            <div class="social-icons">
+              <a href="https://www.facebook.com/" class="social-icon"
+                ><img src="{% static 'style/img/fb.png' %}" alt="Фэйсбук"
+              /></a>
+              <a href="https://vk.com/noobik_novi4ok" class="social-icon"
+                ><img src="{% static 'style/img/vk.png' %}" alt="Вконтакте"
+              /></a>
+              <a href="https://web.telegram.org/a/" class="social-icon"
+                ><img src="{% static 'style/img/telegram.png' %}" alt="Телеграм"
+              /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <hr />
+        <h3>Наши магазины в вашем городе</h3>
+        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A0884b192d55fbd73ce85a6ac2c7c61901ed3fe24b4d347f852e54fa189c91510&amp;width=inherit&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
+      </div>
+    <div class="container">
+      <hr />
+    </div>
+      <div class="container mb-2">
+        <div class="model_item_po4ta" style="border-radius:34px;border:solid 1px;padding:20px;">
+          <p>
+            Остались вопросы? <br />Можете написать на почту <br /> noname@gmail.com
+          </p>
+          <img src="{% static 'style/img/email.png' %}" alt="Почта" />
+        </div>
+      </div>
+
 {% endblock %}
