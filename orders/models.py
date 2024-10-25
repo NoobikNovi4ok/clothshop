@@ -15,6 +15,11 @@ class OrderItemQuerySet(models.QuerySet):
 
 
 class Order(models.Model):
+    STATUS_CHOICES = [
+        ("Новый", "Новый"),
+        ("Отменен", "Отменен"),
+        ("Подтвержден", "Подтвержден"),
+    ]
     user = models.ForeignKey(
         to=User, on_delete=models.SET_DEFAULT, verbose_name="Пользователь", default=None
     )
@@ -22,15 +27,21 @@ class Order(models.Model):
         auto_now_add=True, verbose_name="Дата создания заказа"
     )
     status = models.CharField(
-        max_length=50, default="В обработке", verbose_name="Статус заказа"
+        max_length=50,        choices=STATUS_CHOICES, default="Новый", verbose_name="Статус заказа"
     )
+    cancellation_reason = models.CharField(
+        max_length=250,blank=True, null=True, verbose_name="Причина отмены"
+    )
+
+    def total_quantity(self):
+        return sum(item.quantity for item in self.orderitem_set.all())
 
     class Meta:
         verbose_name = "Заказ"
         verbose_name_plural = "Заказы"
 
     def __str__(self):
-        return f"Заказ № {self.pk} | Покупатель {self.first_name} {self.last_name}"
+        return f"Заказ № {self.pk} | Покупатель {self.user.name} {self.user.surname}"
 
 
 class OrderItem(models.Model):

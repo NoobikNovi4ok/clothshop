@@ -103,6 +103,9 @@
                                                                     <p><strong>{{ order.total_price }} ₽</strong></p>
                                                                     <a class="btn btn-danger"href="{% url 'users:delete_order' order.id %}">Удалить заказ</a>
                                                                 </div>
+                                                                {% if order.status == "Отменен" %}
+                                                                    <p><strong>{{ order.cancellation_reason }}</strong></p>
+                                                                    {% endif %}
                                                             </div>
                                                         </div>
                                                     </div>

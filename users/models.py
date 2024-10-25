@@ -90,7 +90,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = "Пользователи"
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.name} {self.surname} {self.patronymic}"
 
     def has_perm(self, perm, obj=None):
         return True
