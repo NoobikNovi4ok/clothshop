@@ -8,60 +8,7 @@
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12">
 
-{% comment %} <h1>Каталог</h1>
-
-<!-- Форма для фильтрации по категориям (если нужно) -->
-<form method="GET">
-    <select name="category" onchange="this.form.submit()">
-        <option value="0">Все категории</option>
-        {% for category in categories %}
-            <option value="{{ category.slug }}" {% if category.id|stringformat:"d" == category %}selected{% endif %}>
-                {{ category.name }}
-            </option>
-            {% endfor %}
-    </select>
-</form>
-
-<ul>
-    {% if category %}
-        {% if cloths %}
-            {% for cloth in cloths %}
-                <li>
-                    <h2>{{ cloth.name }}</h2>
-                    <p>Цена: {{ cloth.price }} руб.</p>
-                    <p>В наличии: {{ cloth.stock_quantity }}</p>
-                </li>
-            {% empty %}
-                <li>Товары отсутствуют</li>
-            {% endfor %}
-        {% else %}
-        <li>Товары отсутствуют</li>
-        {% endif %}
-    {% else %}
-        {% for cloth in cloths %}
-            <li>
-                <h2>{{ cloth.name }}</h2>
-                <p>Цена: {{ cloth.price }} руб.</p>
-                <p>В наличии: {{ cloth.stock_quantity }}</p>
-            </li>
-        {% empty %}
-            <li>Товары отсутствуют</li>
-        {% endfor %}
-    {% endif %}
-</ul> {% endcomment %}
-
-<h1>Каталог товаров</h1>
-
-    {% comment %} <div>
-        <h2>Фильтр по категориям</h2>
-        <ul>
-            {% for category in categories %}
-                <li>
-                    <a href="?category={{ category.slug }}&sort={{ selected_sort }}{% if selected_category == category.id %}&selected=true{% endif %}">{{ category.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div> {% endcomment %}
+            <h1>Каталог товаров</h1>
 
     <form action="{% url 'catalog' %}" method="get">
         <div class="dropdown mb-1">
@@ -89,15 +36,7 @@
         <input type="submit" value="Показать" class="btn btn-outline-dark">
     <form>
     </div>
-    {% comment %} <div>
-        <h2>Сортировка</h2>
-         <ul>
-            <li><a href="?sort=newest&category={{ selected_category }}">По новизне</a></li>
-            <li><a href="?sort=year&category={{ selected_category }}">По году производства</a></li>
-            <li><a href="?sort=name&category={{ selected_category }}">По наименованию</a></li>
-            <li><a href="?sort=price&category={{ selected_category }}">По цене</a></li>
-        </ul>
-    </div> {% endcomment %}
+
     <div class="col-lg-8 col-md-6 col-sm-12 catalog_tovarov">
         <div class="row justify-content-between">
             {% for cloth in cloths %}
@@ -115,6 +54,24 @@
             {% endfor %}
         </div>
     </div>
+    <!-- Пагинация -->
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; Первая</a>
+            <a href="?page={{ page_obj.previous_page_number}}">Предыдущая</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page=1{% if selected_category %} &category={{ selected_category|join:'&category=' }} {% endif %}">&laquo; Первая</a>
+            <a href="?page={{ page_obj.next_page_number }}{% if selected_category %}&category={{ selected_category|join:'&category=' }} {% endif %}">Следующая</a>
+        {% endif %}
+    </span>
+</div>
     </div>
     </div>
     <script>

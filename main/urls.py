@@ -1,12 +1,8 @@
-from django.urls import path, include
-from . import views
-
-from django.conf import settings
-from django.conf.urls.static import static
-
+from django.urls import path
+from main import views
 
 urlpatterns = [
-    path("", views.index, name="home"),
-    path("catalog", views.catalog, name="catalog"),
-    path("contact", views.contact, name="contact"),
+    path("", views.IndexView.as_view(), name="home"),
+    path("catalog", views.CatalogView.as_view(), name="catalog"),
+    path("contact", views.ContactView.as_view(), name="contact"),
 ]

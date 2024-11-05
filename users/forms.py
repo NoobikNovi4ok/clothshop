@@ -4,7 +4,8 @@ from django.forms import widgets
 from django.utils.translation import gettext_lazy as _
 import re
 from users.models import User
-
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate
 
 class UserRegistrationForm(forms.ModelForm):
     name = forms.CharField(
@@ -225,3 +226,7 @@ class UserLoginForm(forms.Form):
         error_messages={"required": "Это поле обязательно."},
         label="Пароль",
     )
+    class Meta:
+        model = User
+        fields = ['login', 'password']
+

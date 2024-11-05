@@ -1,12 +1,14 @@
 from django.shortcuts import render
+from django.contrib.auth.views import LoginView
 from .forms import UserRegistrationForm, UserLoginForm
 from django.contrib import auth
 from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from orders.models import Order, OrderItem
 from django.db.models import Prefetch
+from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404, redirect
 
 def registration(request):
@@ -31,33 +33,62 @@ def registration(request):
     return render(
         request, "users/registration.html", {"form": form, "title": "Регистрация"}
     )
+    # return render(
+    #      request, "main/layout.html", {"form": form, "title": "Регистрация"}
+    #  )
 
+class UserLoginView(LoginView):
+    template_name = 'users/login.html'
+    form_class = UserLoginForm
+    success_url = reverse_lazy('users:profile')
+    
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
 
-def login(request):
-    if request.method == "POST":
-        form = UserLoginForm(request.POST)
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
         if form.is_valid():
-            login_input = form.cleaned_data["login"]
-            password = form.cleaned_data["password"]
-            user = auth.authenticate(request, login=login_input, password=password)
+            login_value = form.cleaned_data.get('login')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, login=login_value, password=password)
 
-            if user:
-                auth.login(request, user)
+            if user is not None:
+                login(request, user)
                 messages.add_message(
-                    request, messages.INFO, f"{user} вы успешно вошли в аккаунт"
+                     request, messages.INFO, f"{user} вы успешно вошли в аккаунт"
                 )
-                return HttpResponseRedirect(reverse("home"))
+                return redirect(self.success_url)
             else:
-                form.add_error(None, "Неверный логин или пароль.")
+                form.add_error(None, "Неверный логин или пароль.")  # Общая ошибка
 
-        return render(
-            request, "users/login.html", {"form": form, "title": "Авторизация"}
-        )
+        return render(request, self.template_name, {'form': form})
 
-    else:
-        form = UserLoginForm()
+# def login(request):
+#     if request.method == "POST":
+#         form = UserLoginForm(request.POST)
+#         if form.is_valid():
+#             login_input = form.cleaned_data["login"]
+#             password = form.cleaned_data["password"]
+#             user = auth.authenticate(request, login=login_input, password=password)
 
-    return render(request, "users/login.html", {"form": form, "title": "Авторизация"})
+#             if user:
+#                 auth.login(request, user)
+#                 messages.add_message(
+#                     request, messages.INFO, f"{user} вы успешно вошли в аккаунт"
+#                 )
+#                 return HttpResponseRedirect(reverse("home"))
+#             else:
+#                 form.add_error(None, "Неверный логин или пароль.")
+
+#         return render(
+#             request, "users/login.html", {"form": form, "title": "Авторизация"}
+#         )
+
+#     else:
+#         form = UserLoginForm()
+
+#     return render(request, "users/login.html", {"form": form, "title": "Авторизация"})
 
 @login_required
 def profile(request):

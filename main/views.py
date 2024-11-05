@@ -1,81 +1,73 @@
-from django.db.models import Q
-from django.shortcuts import render
-from goods.models import Categories, Countries, Cloths
+from goods.models import Categories, Cloths
+from django.views.generic import TemplateView, ListView
+
+class IndexView(TemplateView):
+    template_name = "main/index.html"
 
 
-def index(request):
-    return render(request, "main/index.html")
+class CatalogView(ListView):
+    model = Cloths
+    context_object_name = "cloths"
+    template_name = "main/catalog.html"
+    paginate_by = 1
+    allow_empty = False
 
+    # def get(self, request, *args, **kwargs):
+    #     return render(request, self.template_name, self.get_context_data())
 
-# def catalog(request):
-#     categories = Categories.objects.all()
-#     cloths = Cloths.objects.filter(quantity__gt=0)
-#     category_slug = request.GET.get("category", 0)
-#     if category_slug:
-#         category = Categories.objects.get(slug=category_slug)
-#         print(category)
-#         print(category.id)
-#         shmot = Cloths.objects.filter(category=category.id)
-#         print(shmot)
-#         if shmot:
-#             context = {
-#                 "cloths": shmot,
-#                 "categories": categories,
-#                 "category": category,
-#             }
-#             return render(request, "main/catalog.html", context)
-#         else:
-#             context = {"categories": categories}
-#     else:
-#         context = {
-#             "cloths": cloths,
-#             "categories": categories,
-#         }
-#     return render(request, "main/catalog.html", context)
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     cloths = Cloths.objects.filter(quantity__gt=0).order_by("-pk")
+    #     categorya = None
 
+    #     # Фильтрация по категории
+    #     category_slug = self.request.GET.getlist("category", 0)
+    #     if category_slug:
+    #         categorya = Categories.objects.filter(slug__in=category_slug)
+    #         cloths = cloths.filter(category__in=categorya)
 
-def catalog(request):
-    cloths = Cloths.objects.filter(quantity__gt=0)  # Показываем только доступные товары
-    categories = Categories.objects.all()
-    reguest = request.GET.getlist('sort')
-    categorya = None
+    #     # Сортировка
+    #     sort_by = self.request.GET.get("sort", "newest")
+    #     if sort_by == "year":
+    #         cloths = cloths.order_by("-year")
+    #     elif sort_by == "name":
+    #         cloths = cloths.order_by("name")
+    #     elif sort_by == "price":
+    #         cloths = cloths.order_by("cost")
+            
+    #     context['categories'] = Categories.objects.all()
+    #     context['cloths'] = cloths
+    #     context['request'] = self.request.GET.getlist('sort')
+    #     context["selected_category"] = category_slug
+    #     context['select_category'] = categorya
+    #     context["selected_sort"] = sort_by
+    #     return context
+    def get_queryset(self):
+        cloths = super().get_queryset().filter(quantity__gt=0).order_by("-pk")      
+        # Фильтрация по категории
+        category_slug = self.request.GET.getlist("category", [])
+        if category_slug:
+            categorya = Categories.objects.filter(slug__in=category_slug)
+            cloths = cloths.filter(category__in=categorya)
+        # Сортировка
+        sort_by = self.request.GET.get("sort", "newest")
+        if sort_by == "year":
+            cloths = cloths.order_by("-year")
+        elif sort_by == "name":
+            cloths = cloths.order_by("name")
+        elif sort_by == "price":
+            cloths = cloths.order_by("cost")
+        return cloths
 
-    # Фильтрация по категории
-    category_slug = request.GET.getlist("category", 0)
-    if category_slug:
-        categorya = Categories.objects.filter(slug__in=category_slug)
-        cloths = cloths.filter(category__in=categorya)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        selected_category = self.request.GET.getlist("category", [])    
 
+        context['categories'] = Categories.objects.all()     
+        context["selected_category"] = selected_category       
+        context['select_category'] = Categories.objects.filter(slug__in=context["selected_category"])        
+        context["selected_sort"] = self.request.GET.get("sort", "newest")
+        return context
 
-    # Сортировка
-    sort_by = request.GET.get("sort", "newest")
-    cloths = cloths.order_by("-pk")
-    if sort_by == "year":
-        cloths = cloths.order_by("-year")
-    elif sort_by == "name":
-        cloths = cloths.order_by("name")
-    elif sort_by == "price":
-        cloths = cloths.order_by("cost")
-
-    if categorya is not None:
-        context = {
-            "select_category":categorya,
-            "cloths": cloths,
-            "categories": categories,
-            "selected_category": category_slug,
-            "selected_sort": sort_by,
-            "request": reguest,
-        }
-    else:
-        context = {
-            "cloths": cloths,
-            "categories": categories,
-            "selected_category": category_slug,
-            "selected_sort": sort_by,
-            "request": reguest,
-        }
-    return render(request, "main/catalog.html", context)
-
-
-def contact(request):
-    return render(request, "main/contact.html")
+class ContactView(TemplateView):
+    template_name = "main/contact.html"

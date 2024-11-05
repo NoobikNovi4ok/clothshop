@@ -1,7 +1,7 @@
 from django.urls import path
 
-from goods.views import goods_get
+from goods import views
 
 urlpatterns = [
-    path(r"<slug:slug>", goods_get),
+    path(r"<slug:slug>", views.GoodsView.as_view()),
 ]

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # 'crispy_forms',
+    # 'crispy_bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +65,7 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
+                'users.context_processors.registration_form',
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
@@ -131,9 +134,20 @@ STATICFILES_DIRS = [BASE_DIR / "static", "/var/www/static/"]
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
+
+LOGIN_URL = '/user/login/'
+LOGIN_REDIRECT_URL = '/user/profile'
+
+# CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
