@@ -1,4 +1,9 @@
 {
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.enabled": false,
+  "editor.fontSize": 16,
+  "explorer.compactFolders": false,
+
   "git.autoRepositoryDetection": "subFolders",
   "breadcrumbs.enabled": true,
 
@@ -22,11 +27,14 @@
   ],
 
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true
   },
+
   "emmet.includeLanguages": {
     "django-html": "html"
   },
+
   "files.associations": {
     "**/*.html": "html",
     "**/templates/*/*.html": "django-html",
@@ -34,15 +42,19 @@
     "**/templates/*": "django-txt",
     "**/requirements{/**,*}.{txt,in}": "pip-requirements"
   },
+
   "django.snippets.exclude": ["cms", "wagtail"],
 
   "[django-html]": {
-    "editor.defaultFormatter": "batisteo.vscode-django",
+    "editor.defaultFormatter": "monosans.djlint",
     "breadcrumbs.showClasses": true,
     "editor.quickSuggestions": {
       "other": true,
       "comments": true,
       "strings": true
     }
-  }
+  },
+
+  // Дополнительные настройки
+  "html.autoClosingTags": true
 }

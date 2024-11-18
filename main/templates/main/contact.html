@@ -1,40 +1,51 @@
 {% extends 'main/layout.html' %}
 {% load static %}
-{% block title %}
-Контакты
-{% endblock %}
+{% block title %}Контакты{% endblock %}
 {% block content %}
-<div class="container liquid">
+  <div class="container liquid">
     <div class="row justify-content-between align-items-center mx-2">
-        <div class="col-sm-5 col-md-5 col-lg-5 contact_modal" style="border-radius:34px;border:solid 1px;padding:20px;">
-
-            <h3>Физический адрес</h3>
-            <p style="margin-bottom:0;">Город Владимир</p>
-            <p style="margin-bottom:0;">Улица Белоконской дом 43</p>
-          </div>
-          <div class="col-sm-6 col-md-5 col-lg-5 contact_modal" style="border-radius:34px;border:solid 1px;padding:20px;">
-
-            <h3>Номер телефона</h3>
-            <p>Для связи с нами можете обратиться по телефону</p><p>+79241236854</p>
-        </div>
-    </div>
-    </div>
-
-      <div class="container">
-        <hr />
-        <h3>Наши магазины в вашем городе</h3>
-        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A0884b192d55fbd73ce85a6ac2c7c61901ed3fe24b4d347f852e54fa189c91510&amp;width=inherit&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
+      <div class="col-sm-5 col-md-5 col-lg-5 contact_modal text-center"
+           style="border-radius:34px;
+                  border:solid 1px;
+                  padding:20px">
+        <h3 class="pb-2">Физический адрес</h3>
+        <p style="margin-bottom:0;" class="h4 pb-4">Город Владимир</p>
+        <p style="margin-bottom:0;" class="h3">Улица Белоконской дом 43</p>
       </div>
-    <div class="container">
-      <hr />
-    </div>
-      <div class="container mb-2">
-        <div class="model_item_po4ta" style="border-radius:34px;border:solid 1px;padding:20px;">
-          <p>
-            Остались вопросы? <br />Можете написать на почту <br /> noname@gmail.com
-          </p>
-          <img src="{% static 'style/img/email.png' %}" alt="Почта" />
-        </div>
+      <div class="col-sm-6 col-md-5 col-lg-5 contact_modal text-center"
+           style="border-radius:34px;
+                  border:solid 1px;
+                  padding:20px">
+        <h3 class="pb-2">Номер телефона</h3>
+        <p class="h4 ">Для связи с нами можете обратиться по телефону</p>
+        <p class="h3 ">+79241236854</p>
       </div>
-
+    </div>
+  </div>
+  <div class="container">
+    <hr />
+    <h3>Наши магазины в вашем городе</h3>
+    <script type="text/javascript"
+            charset="utf-8"
+            async
+            src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A0884b192d55fbd73ce85a6ac2c7c61901ed3fe24b4d347f852e54fa189c91510&amp;width=inherit&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
+  </div>
+  <div class="container">
+    <hr />
+  </div>
+  <div class="container mb-2">
+    <div class="model_item_po4ta"
+         style="border-radius:34px;
+                border:solid 1px;
+                padding:20px">
+      <p>
+        Остались вопросы?
+        <br />
+        Можете написать на почту
+        <br />
+        noname@gmail.com
+      </p>
+      <img src="{% static 'style/img/email.png' %}" alt="Почта" />
+    </div>
+  </div>
 {% endblock %}

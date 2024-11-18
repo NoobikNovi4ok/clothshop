@@ -1,10 +1,8 @@
-from django.db.models import Q
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
-from goods.models import Cloths
-from basket.models import Basket
 from django.template.loader import render_to_string
 from basket.utils import get_user_basket
+from basket.models import Basket
+from goods.models import Cloths
 
 
 def basket_add(request):

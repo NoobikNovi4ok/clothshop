@@ -65,7 +65,7 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
-                'users.context_processors.registration_form',
+                "users.context_processors.registration_form",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
@@ -145,8 +145,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
 
-LOGIN_URL = '/user/login/'
-LOGIN_REDIRECT_URL = '/user/profile'
+LOGIN_URL = "/user/login/"
+LOGIN_REDIRECT_URL = "/user/profile"
 
 # CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

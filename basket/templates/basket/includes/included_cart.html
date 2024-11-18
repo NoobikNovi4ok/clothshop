@@ -2,95 +2,119 @@
 {% load basket_tags %}
 {% load url_search_tags %}
 {% find_search_url request as find_search %}
-
 {% if basket %}
 {% else %}
     {% user_basket request as basket %}
 {% endif %}
-<div class="card mb-3 text-bg-light col-md-12 col-sm-12 col-lg-12 row" style="width:100%;padding-right:0;padding-left:0;">
+<div class="card mb-3 text-bg-light col-md-12 col-sm-12 col-lg-12 row"
+     style="width:100%;
+            padding-right:0;
+            padding-left:0">
     {% for cart in basket %}
-    {% csrf_token %}
-    <div class="card-header">
-        <a href="/product/{{cart.cloth.slug}}" class="card-title h5" style="text-decoration:none;">{{cart.cloth.name}}</a>
-    </div>
-    <ul class="list-group list-group-flush" style="padding-right:0;padding-left:0;">
-        <li class="list-group-item">
-            <div class="row" style="text-align: center;justify-content: space-around;align-items: center;">
-            <div class="col-lg-4 col-md-6 col-sm-12 p-0">
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-dark btn-sm decrement"
-                            data-cart-id="{{cart.basket_id}}"
-                            data-cart-change-url="{% url 'basket:basket_change' %}">
-                        {% csrf_token %}
-                        -</button>
-                    </span>
-                    <label>Кол-во товара
-                    <input type="number" class="form-control number" value="{{cart.quantity}}" min="1"
-                    data-old-quantity="{{ cart.quantity }}"
-                    max="{{ cart.cloth.quantity }}"
-                    data-max-quantity="{{ cart.max_quantity }}" 
-                    data-cart-change-url="{% url 'basket:basket_change' %}" 
-                    data-cart-id="{{ cart.basket_id }}">
-                    </label>
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-dark btn-sm increment"
-                            data-cart-id="{{cart.basket_id}}"
-                            data-cart-change-url="{% url 'basket:basket_change' %}">
+        {% csrf_token %}
+        <div class="card-header">
+            <a href="/product/{{ cart.cloth.slug }}"
+               class="card-title h5"
+               style="text-decoration:none">{{ cart.cloth.name }}</a>
+        </div>
+        <ul class="list-group list-group-flush"
+            style="padding-right:0;
+                   padding-left:0">
+            <li class="list-group-item">
+                <div class="row"
+                     style="text-align: center;
+                            justify-content: space-around;
+                            align-items: center">
+                    <div class="col-lg-4 col-md-6 col-sm-12 p-0">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button type="button"
+                                        class="btn btn-dark btn-sm decrement"
+                                        data-cart-id="{{ cart.basket_id }}"
+                                        data-cart-change-url="{% url 'basket:basket_change' %}">
+                                    {% csrf_token %}
+                                    -
+                                </button>
+                            </span>
+                            <label>
+                                Кол-во товара
+                                <input type="number"
+                                       class="form-control number"
+                                       value="{{ cart.quantity }}"
+                                       min="1"
+                                       data-old-quantity="{{ cart.quantity }}"
+                                       max="{{ cart.cloth.quantity }}"
+                                       data-max-quantity="{{ cart.max_quantity }}"
+                                       data-cart-change-url="{% url 'basket:basket_change' %}"
+                                       data-cart-id="{{ cart.basket_id }}">
+                            </label>
+                            <span class="input-group-btn">
+                                <button type="button"
+                                        class="btn btn-dark btn-sm increment"
+                                        data-cart-id="{{ cart.basket_id }}"
+                                        data-cart-change-url="{% url 'basket:basket_change' %}">
+                                    {% csrf_token %}
+                                    +
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-12 p-0">
+                        <p style="margin:0;">{{ cart.product.cost }} ₽ =</p>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-12 p-0">
+                        <strong>{{ cart.products_price }} ₽</strong>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-12 p-0">
+                        <a href="{% url 'basket:basket_remove' %}"
+                           class="remove-from-cart"
+                           data-cart-id="{{ cart.basket_id }}">
                             {% csrf_token %}
-                            +</button>
-                    </span>
+                            <img src="{% static './style/img/trash_icon.png' %}"
+                                 alt="Иконка мусорки"
+                                 width="32"
+                                 height="32">
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-12 p-0" >
-                <p style="margin:0;">{{ cart.product.cost }} ₽ = </p>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-12 p-0"><strong>{{ cart.products_price }} ₽</strong></div>
-                <div class="col-lg-2 col-md-4 col-sm-12 p-0">
-                    <a href="{% url 'basket:basket_remove' %}" class="remove-from-cart"
-                        data-cart-id="{{ cart.basket_id }}">
-                        {% csrf_token %}
-                    <img src="{% static './style/img/trash_icon.png' %}"
-                    alt="Иконка мусорки" width="32" height="32">
-                    </a>
-                </div>
-            </div>
-        </li>
-    </ul>
+            </li>
+        </ul>
     {% endfor %}
 </div>
 {% if basket %}
-<div class="column container row" style="padding-left:0;padding-right:0;">
-    <div class="card mb-3 d-flex col-lg-3 col-md-6 col-sm-12">
-        <p class="float-left" id="minecraft" data-max-count="{{ basket.total_quantity }}">Итого <strong>{{ basket.total_quantity }}</strong> товар(а) на сумму</p>
-        <h4 class="float-left"><strong>{{ basket.total_price }} ₽</strong></h4>
+    <div class="column container row" style="padding-left:0;padding-right:0;">
+        <div class="card mb-3 d-flex col-lg-3 col-md-6 col-sm-12">
+            <p class="float-left"
+               id="minecraft"
+               data-max-count="{{ basket.total_quantity }}">
+                Итого <strong>{{ basket.total_quantity }}</strong> товар(а) на сумму
+            </p>
+            <h4 class="float-left">
+                <strong>{{ basket.total_price }} ₽</strong>
+            </h4>
+        </div>
     </div>
-</div>
-{% url 'orders:create_order' as create_order_url %}
-{% url 'user:users-basket' as basketi4 %}
-{% if request.path == create_order_url %}
-{% else %}
-{% if request.path == basketi4 %}
-<div class="col-lg-4 col-md-6 col-sm-8" style="padding:0;margin:0;">
-    <a class="btn btn-outline-success orange" href="{% url 'orders:create_order' %}">
-        Сформировать заказ
-    </a>
-</div>
-{% endif %}
-{% if find_search == basketi4 %}
-<div class="col-lg-4 col-md-6 col-sm-8" style="padding:0;margin:0;">
-    <a class="btn btn-outline-success orange" href="{% url 'orders:create_order' %}">
-        Сформировать заказ
-    </a>
-</div>
-{% endif %}
-{% endif %}
+    {% url 'orders:create_order' as create_order_url %}
+    {% url 'user:users-basket' as basketi4 %}
+    {% if request.path == create_order_url %}
+    {% else %}
+        {% if request.path == basketi4 %}
+            <div class="col-lg-4 col-md-6 col-sm-8" style="padding:0;margin:0;">
+                <a class="btn btn-outline-success orange"
+                   href="{% url 'orders:create_order' %}">Сформировать заказ</a>
+            </div>
+        {% endif %}
+        {% if find_search == basketi4 %}
+            <div class="col-lg-4 col-md-6 col-sm-8" style="padding:0;margin:0;">
+                <a class="btn btn-outline-success orange"
+                   href="{% url 'orders:create_order' %}">Сформировать заказ</a>
+            </div>
+        {% endif %}
+    {% endif %}
 </div>
 {% else %}
 <div class="col-lg-4 col-md-6 col-sm-8">
     <p>Корзина пуста</p>
-    <a class="btn btn-outline-dark orange" href="{% url 'catalog' %}">
-        Перейти в каталог
-    </a>
+    <a class="btn btn-outline-dark orange" href="{% url 'catalog' %}">Перейти в каталог</a>
 </div>
 {% endif %}

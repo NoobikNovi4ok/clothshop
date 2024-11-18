@@ -27,10 +27,13 @@ class Order(models.Model):
         auto_now_add=True, verbose_name="Дата создания заказа"
     )
     status = models.CharField(
-        max_length=50,        choices=STATUS_CHOICES, default="Новый", verbose_name="Статус заказа"
+        max_length=50,
+        choices=STATUS_CHOICES,
+        default="Новый",
+        verbose_name="Статус заказа",
     )
     cancellation_reason = models.CharField(
-        max_length=250,blank=True, null=True, verbose_name="Причина отмены"
+        max_length=250, blank=True, null=True, verbose_name="Причина отмены"
     )
 
     def total_quantity(self):

@@ -1,11 +1,11 @@
+import re
 from django import forms
 from django.core.exceptions import ValidationError
-from django.forms import widgets
 from django.utils.translation import gettext_lazy as _
-import re
-from users.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate
+from users.models import User
+
 
 class UserRegistrationForm(forms.ModelForm):
     name = forms.CharField(
@@ -139,6 +139,7 @@ class UserRegistrationForm(forms.ModelForm):
             "email",
             "password",
             "password_repeat",
+            "rules",
         ]
 
     def clean_name(self):
@@ -177,13 +178,15 @@ class UserRegistrationForm(forms.ModelForm):
             )
         return email
 
-    def clean(self):
+    def clean_password_repeat(self):
         cleaned_data = super().clean()
         password = cleaned_data.get("password")
         password_repeat = cleaned_data.get("password_repeat")
 
         if password and password_repeat and password != password_repeat:
             raise ValidationError(_("Пароли не совпадают."))
+
+        return password_repeat
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -195,7 +198,10 @@ class UserRegistrationForm(forms.ModelForm):
         return user
 
 
-class UserLoginForm(forms.Form):
+User = get_user_model()
+
+
+class UserLoginForm(AuthenticationForm):
     login = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -226,7 +232,35 @@ class UserLoginForm(forms.Form):
         error_messages={"required": "Это поле обязательно."},
         label="Пароль",
     )
-    class Meta:
-        model = User
-        fields = ['login', 'password']
 
+    error_messages = {
+        "invalid_login": "Неверный логин или пароль. Пожалуйста, попробуйте снова."
+    }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["username"] = self.fields.pop("login")
+
+    def clean(self):
+        username = self.cleaned_data.get("username")
+        password = self.cleaned_data.get("password")
+
+        if username is not None and password:
+            self.user_cache = self.authenticate(username=username, password=password)
+            if self.user_cache is None:
+                raise ValidationError(
+                    self.error_messages["invalid_login"],
+                    code="invalid_login",
+                )
+            else:
+                self.confirm_login_allowed(self.user_cache)
+
+        return self.cleaned_data
+
+    def authenticate(self, username=None, password=None):
+        try:
+            user = User.objects.get(login=username)
+            if user.check_password(password):
+                return user
+        except User.DoesNotExist:
+            return None

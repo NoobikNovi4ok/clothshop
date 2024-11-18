@@ -1,26 +1,28 @@
-{% extends 'main/layout.html' %}
+{% extends "main/layout.html" %}
 {% load static %}
 {% load basket_tags %}
-
 {% block title %}
-    Корзина
-{% endblock %}
-
+  Корзина
+{% endblock title %}
 {% block content %}
-<div class="container">
+  <div class="container">
     {% if basket %}
     {% else %}
-    {% user_basket request as basket %}
+      {% user_basket request as basket %}
     {% endif %}
     <div class="col-md-12 col-lg-12 col-sm-12">
-        <div class=" bg-white mb-4 mx-2 rounded custom-shadow">
-            <h3 class="text-center mb-4">Корзина</h3>
-            <div class="container row not_now" id="cart-items-container" style="margin-left:0;margin-right:0;padding:0;">
-                <!-- Разметка корзины -->
-                    {% include 'basket/includes/included_cart.html' %}
-                <!-- Закончилась разметка корзины -->
-            </div>
+      <div class="bg-white mb-4 mx-2 rounded custom-shadow">
+        <h3 class="text-center mb-4">Корзина</h3>
+        <div class="container row not_now"
+             id="cart-items-container"
+             style="margin-left:0;
+                    margin-right:0;
+                    padding:0">
+          <!-- Разметка корзины -->
+          {% include "basket/includes/included_cart.html" %}
+          <!-- Закончилась разметка корзины -->
         </div>
+      </div>
     </div>
-</div>
-{% endblock %}
+  </div>
+{% endblock content %}

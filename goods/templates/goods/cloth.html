@@ -1,12 +1,12 @@
 {% extends 'main/layout.html' %}
 {% block title %}
-    {{ product.name }}
+  {{ product.name }}
 {% endblock %}
 {% load static %}
 {% block content %}
-<div class="container">
-<h1>{{ product.name }}</h1>
-    <img src="{{ product.photo.url }}" alt="{{ product.name }}" style="width:25%;height:30%;">
+  <div class="container">
+    <h1>{{ product.name }}</h1>
+    <img src="{{ product.photo.url }}" alt="{{ product.name }}" style="width:25%;height:30%;" />
     <p style="text-wrap:balance;">{{ product.description }}</p>
     <p>Страна производитель - {{ product.country }}</p>
     <p>Год выпуска - {{ product.year }}</p>
@@ -15,27 +15,26 @@
 
     <h2>Выберите размер:</h2>
     <select id="size-select">
-        {% for size in sizes %}
-            <option value="{{ size.size_label }}">{{ size.size_label }}</option>
-        {% endfor %}
+      {% for size in sizes %}
+        <option value="{{ size.size_label }}">{{ size.size_label }}</option>
+      {% endfor %}
     </select>
 
     <h2>Выберите цвет:</h2>
     <select id="color-select">
-        {% for color in colors %}
-            <option value="{{ color.color_label }}">{{ color.color_label }}</option>
-        {% endfor %}
+      {% for color in colors %}
+        <option value="{{ color.color_label }}">{{ color.color_label }}</option>
+      {% endfor %}
     </select>
-    <br>
+    <br />
     {% if user.is_authenticated %}
-                    <a href="{% url 'basket:basket_add' %}" class="btn btn-outline-dark add-to-cart mt-2"
-                       data-product-id="{{ product.id }}">В корзину</a>
-                    {% csrf_token %}
-                    <div class="container">
-                      <div id="jq-notification" class="alert alert-success col-lg-3 col-md-6 col-sm-9 mt-1" style="display:none;visibility:hidden;"></div>
-                    </div>
-                    {% else %}
-                    <a href="{% url 'user:login' %}?message=1" class="btn btn-outline-dark">В корзину</a>
-                    {% endif %}
-</div>
+      <a href="{% url 'basket:basket_add' %}" class="btn btn-outline-dark add-to-cart mt-2" data-product-id="{{ product.id }}">В корзину</a>
+      {% csrf_token %}
+      <div class="container">
+        <div id="jq-notification" class="alert alert-success col-lg-3 col-md-6 col-sm-9 mt-1" style="display:none;visibility:hidden;"></div>
+      </div>
+    {% else %}
+      <a href="{% url 'user:login' %}?message=1" class="btn btn-outline-dark">В корзину</a>
+    {% endif %}
+  </div>
 {% endblock %}

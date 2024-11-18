@@ -39,8 +39,8 @@
     height: 100px;
     bottom: 10%;
   }
-  .catalog_tovarov{
-    margin-top:10px;
+  .catalog_tovarov {
+    margin-top: 10px;
   }
   .slider-button {
     top: 85% !important;
@@ -50,20 +50,25 @@
     margin-right: auto;
     margin-left: auto;
   }
-  .card-img{
-    width:140px;
-    height:140px;
+  .card-img {
+    width: 140px;
+    height: 140px;
   }
-  .contact_modal{
-    margin-bottom:30px;
+  .contact_modal {
+    margin-bottom: 30px;
   }
-  .contact_modal_without{
-    margin-bottom:30px;
+  .contact_modal_without {
+    margin-bottom: 30px;
   }
-  .icon_image{
+  .icon_image {
     width: 32px;
     height: 32px;
   }
+}
+
+.my_brake_word {
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 @media (min-width: 576px) {
@@ -92,16 +97,16 @@
   .dropdown-menu.show {
     width: 100%;
   }
-  .catalog_tovarov{
-    margin-top:20px;
+  .catalog_tovarov {
+    margin-top: 20px;
   }
-  .card-img{
-    width:180px;
-    height:180px;
+  .card-img {
+    width: 180px;
+    height: 180px;
   }
-  .contact_modal{
-    height:250px !important;
-    margin-bottom:25px;
+  .contact_modal {
+    height: 250px !important;
+    margin-bottom: 25px;
   }
 }
 
@@ -197,7 +202,7 @@
 }
 
 .card {
-  width:18rem;
+  width: 18rem;
   border-radius: 30px;
   border: solid 1px;
   transition: all 2s ease-in;

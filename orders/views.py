@@ -1,64 +1,64 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.db import transaction
+from django.forms import ValidationError
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import FormView
 from basket.models import Basket
 from orders.forms import CreateOrderForm
 from orders.models import Order, OrderItem
-from django.forms import ValidationError
-from django.contrib import messages
 from users.models import User
 
 
-@login_required
-def create_order(request):
-    if request.method == "POST":
-        form = CreateOrderForm(data=request.POST)
-        if form.is_valid():
-            login = form.cleaned_data["login"]
-            password = form.cleaned_data["password"]
-            user = User.objects.get(login=login)
-            if user.check_password(password):
-                try:
-                    with transaction.atomic():
-                        user = request.user
-                        cart_items = Basket.objects.filter(user=user)
+class CreateOrderView(LoginRequiredMixin, FormView):
+    template_name = "orders/create_order.html"
+    form_class = CreateOrderForm
+    success_url = reverse_lazy("users:profile")
 
-                        if cart_items.exists():
-                            order = Order.objects.create(
-                                user=user,
-                            )
-                            for cart_item in cart_items:
-                                product = cart_item.cloth
-                                price = cart_item.cloth.cost
-                                quantity = cart_item.quantity
+    def form_valid(self, form):
+        login = form.cleaned_data["login"]
+        password = form.cleaned_data["password"]
+        user = User.objects.get(login=login)
 
-                                if product.quantity < quantity:
-                                    raise ValidationError(
-                                        f"Недостаточное количество товара {product.name} на складе\
-                                                            В наличии - {product.quantity}"
-                                    )
+        if user.check_password(password):
+            try:
+                with transaction.atomic():
+                    user = self.request.user
+                    cart_items = Basket.objects.filter(user=user)
 
-                                OrderItem.objects.create(
-                                    order=order,
-                                    product=product,
-                                    price=price,
-                                    quantity=quantity,
+                    if cart_items.exists():
+                        order = Order.objects.create(user=user)
+                        for cart_item in cart_items:
+                            product = cart_item.cloth
+                            price = cart_item.cloth.cost
+                            quantity = cart_item.quantity
+
+                            if product.quantity < quantity:
+                                raise ValidationError(
+                                    f"Недостаточное количество товара {product.name} на складе. В наличии - {product.quantity}"
                                 )
-                                product.quantity -= quantity
-                                product.save()
 
-                            cart_items.delete()
+                            OrderItem.objects.create(
+                                order=order,
+                                product=product,
+                                price=price,
+                                quantity=quantity,
+                            )
+                            product.quantity -= quantity
+                            product.save()
 
-                            messages.success(request, "Заказ оформлен")
+                        cart_items.delete()
+                        messages.success(self.request, "Заказ оформлен")
 
-                except ValidationError as e:
-                    messages.error(request, str(e))
-                    return redirect("orders:create_order")
-            else:
-                messages.error(request, "Неверный пароль")
+            except ValidationError as e:
+                messages.error(self.request, str(e))
                 return redirect("orders:create_order")
-    else:
-        form = CreateOrderForm()
+        else:
+            messages.error(self.request, "Неверный пароль")
+            return redirect("orders:create_order")
 
-    context = {"form": form}
-    return render(request, "orders/create_order.html", context=context)
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return self.render_to_response({"form": form})
