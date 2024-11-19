@@ -1,0 +1,7 @@
+Необходмио создать файл в clothshop .env
+В нем написать
+DB_NAME=clothsdb
+DB_USER=postgres
+DB_PASSWORD=password
+DB_HOST=localhost
+DB_PORT=5432
