@@ -4320,7 +4320,7 @@ $(document).ready(function () {
     });
   });
 
-  // Ловим собыитие клика по кнопке удалить товар из корзины
+  // Ловим событие клика по кнопке удалить товар из корзины
   $(document).on("click", ".remove-from-cart", function (e) {
     // Блокируем его базовое действие
     e.preventDefault();
@@ -4394,12 +4394,16 @@ $(document).ready(function () {
     var cartID = $(this).data("cart-id");
     // Ищем ближайшеий input с количеством
     var $input = $(this).closest(".input-group").find(".number");
+    var maxQuantity = parseInt($input.attr("max"), 10);
     // Берем значение количества товара
     var currentValue = parseInt($input.val());
-
-    // Запускаем функцию определенную ниже
-    // с аргументами (id карты, новое количество, количество уменьшилось или прибавилось, url)
-    updateCart(cartID, currentValue + 1, 1, url);
+    if (currentValue >= maxQuantity) {
+      console.log("Quantity cannot be more than max quantity");
+    } else {
+      // Запускаем функцию определенную ниже
+      // с аргументами (id карты, новое количество, количество уменьшилось или прибавилось, url)
+      updateCart(cartID, currentValue + 1, 1, url);
+    }
   });
 
   $(document).on("change", ".number", function () {

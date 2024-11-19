@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "password": "pbkdf2_sha256$870000$mmKMLGgaIyxr4ZU5JzN9ZU$Xs7NX+Dv6TC7zv9NRusnS3YJ9BMbAnLgmWutjX30mbM=",
-      "last_login": "2024-10-14T08:05:52.857Z",
+      "last_login": "2024-11-18T16:25:54.104Z",
       "name": "Даниил",
       "surname": "Казаков",
       "patronymic": "",
@@ -13,6 +13,96 @@
       "is_active": true,
       "is_staff": true,
       "is_superuser": true,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$3UDFXeQIJx1TduOvRLkGbd$uQngQQLZphF/txyf7R+wBbkIJyiNFLMXPM0WC/vr50g=",
+      "last_login": null,
+      "name": "Дан",
+      "surname": "Каз",
+      "patronymic": "",
+      "login": "admin2",
+      "email": "antonpetya1332@mail.ru",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$OkMgUIFylRKgfqkTy9iLlC$3STjM5uCRyZkHiqhdpSiCx3obzO5AIeMtOz2nnMAIGM=",
+      "last_login": "2024-11-01T19:09:12.011Z",
+      "name": "Даниил",
+      "surname": "Казаков",
+      "patronymic": "Александрович",
+      "login": "admin1",
+      "email": "antonpetya1330@mail.ru",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$zUCM97gS640e7QVJUzEnkw$mpVrn/gJLzuMiiqdZGNssXoXDAOTHWRnaJ58gUzPGtE=",
+      "last_login": null,
+      "name": "Даниил",
+      "surname": "Казаков",
+      "patronymic": "",
+      "login": "asdsda",
+      "email": "asd@mail.ru",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$yklsXZuhSvUtn5Vzl44Ra6$KjY+aQdL6mVBALjetJkfGLMdkYuKgZEb2INl1unqfMk=",
+      "last_login": "2024-11-16T17:18:55.050Z",
+      "name": "Даниил",
+      "surname": "Казаков",
+      "patronymic": "",
+      "login": "qwerty",
+      "email": "minecraft@mail.ru",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$pJgqWfRMeWqt7F6IreMg5q$3Cb/1hzfDrJf2PL02Jl/9pCZLPzAKc/28RYCNH9jh3Q=",
+      "last_login": "2024-11-18T16:26:40.684Z",
+      "name": "Даниил",
+      "surname": "Казаков",
+      "patronymic": "Александрович",
+      "login": "minecraft",
+      "email": "aqweqw@mail.ru",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
       "groups": [],
       "user_permissions": []
     }

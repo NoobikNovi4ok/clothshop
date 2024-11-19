@@ -18,5 +18,35 @@
     "model": "goods.size",
     "pk": 4,
     "fields": { "size_label": "XL", "is_available": true }
+  },
+  {
+    "model": "goods.size",
+    "pk": 5,
+    "fields": { "size_label": "XL", "is_available": true }
+  },
+  {
+    "model": "goods.size",
+    "pk": 6,
+    "fields": { "size_label": "L", "is_available": true }
+  },
+  {
+    "model": "goods.size",
+    "pk": 7,
+    "fields": { "size_label": "S", "is_available": true }
+  },
+  {
+    "model": "goods.size",
+    "pk": 8,
+    "fields": { "size_label": "M", "is_available": true }
+  },
+  {
+    "model": "goods.size",
+    "pk": 9,
+    "fields": { "size_label": "S", "is_available": true }
+  },
+  {
+    "model": "goods.size",
+    "pk": 10,
+    "fields": { "size_label": "M", "is_available": true }
   }
 ]

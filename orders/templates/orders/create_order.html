@@ -1,8 +1,10 @@
-{% extends 'main/layout.html' %}
+{% extends "main/layout.html" %}
 {% load static %}
+{% load basket_tags %}
+{% load url_search_tags %}
 {% block title %}
   Оформление заказа
-{% endblock %}
+{% endblock title %}
 {% block content %}
   <div class="container">
     {% if messages %}
@@ -14,7 +16,6 @@
         {% endif %}
       {% endfor %}
     {% endif %}
-
     <div class="row mt-1">
       <div class="col-lg-12 col-md-12 col-sm-12">
         <!-- Контент на странице -->
@@ -22,13 +23,18 @@
           <h3 class="text-center mb-4">Выбранные товары</h3>
           <div id="cart-items-container">
             <!-- Разметка корзины -->
+            {% user_basket request as basket %}
             {% include 'basket/includes/included_cart.html' %}
             <!-- Закончилась разметка корзины -->
           </div>
-
           <!-- Детали заказа -->
           <h3 class="text-center">Детали заказа</h3>
-          <form class="text-center align-items-center" style="border-radius:20px; border:solid 1px; padding:20px;" action="{% url 'orders:create_order' %}" method="post">
+          <form class="text-center align-items-center"
+                style="border-radius:20px;
+                       border:solid 1px;
+                       padding:20px"
+                action="{% url 'orders:create_order' %}"
+                method="post">
             {% csrf_token %}
             <div>
               {% for field in form %}

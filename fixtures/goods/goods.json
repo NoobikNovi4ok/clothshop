@@ -1,1 +1,53 @@
-[{"model": "goods.cloths", "pk": 1, "fields": {"name": "Костюм классический", "slug": "kostyum-klassicheskij", "photo": "cloths_images/classic_costume_N8abMUw_iSpQgyx.png", "description": "Самый обыкновенный костюм.", "quantity": 10, "cost": "1500.00", "category": 1, "country": 2, "year": 2015, "sizes": [1, 2], "colors": [1, 2]}}, {"model": "goods.cloths", "pk": 2, "fields": {"name": "Брюки классические", "slug": "bryuki-klassicheskie", "photo": "cloths_images/classic_bruki_TT5Jzaw_GD4RLZy.png", "description": "Когда думаешь об осени, сразу представляется осенний пейзаж необычной красоты. Мир вокруг меняется, меняются краски. Это время года является едва ли не самым красочным и в тоже время печальным - природа готовится к зимнему сну, покрытые листвой ветви деревьев постепенно обнажаются.  Осень меняет зеленый цвет на множество цветов и оттенков. Палитра осени яркая и насыщенная, празднично кричащая: от лимонно-желтого до оранжевого, густого темно-желтого цвета.", "quantity": 20, "cost": "2000.00", "category": 2, "country": 1, "year": 2020, "sizes": [3, 4], "colors": [3, 4]}}]
+[
+  {
+    "model": "goods.cloths",
+    "pk": 1,
+    "fields": {
+      "name": "Костюм классический",
+      "slug": "kostyum-klassicheskij",
+      "photo": "cloths_images/classic_costume_N8abMUw_iSpQgyx.png",
+      "description": "Самый обыкновенный костюм.",
+      "quantity": 18,
+      "cost": "2500.00",
+      "category": 1,
+      "country": 2,
+      "year": 2020,
+      "sizes": [1, 2],
+      "colors": [1, 2]
+    }
+  },
+  {
+    "model": "goods.cloths",
+    "pk": 2,
+    "fields": {
+      "name": "Брюки классические",
+      "slug": "bryuki-klassicheskie",
+      "photo": "cloths_images/classic_bruki_TT5Jzaw_GD4RLZy.png",
+      "description": "Когда думаешь об осени, сразу представляется осенний пейзаж необычной красоты. Мир вокруг меняется, меняются краски. Это время года является едва ли не самым красочным и в тоже время печальным - природа готовится к зимнему сну, покрытые листвой ветви деревьев постепенно обнажаются.  Осень меняет зеленый цвет на множество цветов и оттенков. Палитра осени яркая и насыщенная, празднично кричащая: от лимонно-желтого до оранжевого, густого темно-желтого цвета.",
+      "quantity": 4,
+      "cost": "2000.00",
+      "category": 2,
+      "country": 1,
+      "year": 2020,
+      "sizes": [3, 4],
+      "colors": [3, 4]
+    }
+  },
+  {
+    "model": "goods.cloths",
+    "pk": 3,
+    "fields": {
+      "name": "Рубашка классическая",
+      "slug": "rubashka-klassicheskaya",
+      "photo": "cloths_images/casual-white-blouse-women-rsquo-s-fashion.png",
+      "description": "Рубашечка красивая",
+      "quantity": 24,
+      "cost": "1000.00",
+      "category": 4,
+      "country": 2,
+      "year": 2024,
+      "sizes": [5, 6],
+      "colors": [5, 6]
+    }
+  }
+]

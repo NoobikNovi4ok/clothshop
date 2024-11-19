@@ -12,9 +12,18 @@
     "model": "goods.categories",
     "pk": 2,
     "fields": {
-      "name": "Брюки",
+      "name": "Брючки",
       "slug": "bryuki",
       "icon": "icon_category/icon_bruki_hGLLiMq.png"
+    }
+  },
+  {
+    "model": "goods.categories",
+    "pk": 4,
+    "fields": {
+      "name": "Рубашки",
+      "slug": "rubashki",
+      "icon": "icon_category/shirt_8419287_x4LoqXb.png"
     }
   }
 ]

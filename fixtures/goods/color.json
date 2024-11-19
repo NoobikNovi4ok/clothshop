@@ -18,5 +18,35 @@
     "model": "goods.color",
     "pk": 4,
     "fields": { "color_label": "Black", "is_available": true }
+  },
+  {
+    "model": "goods.color",
+    "pk": 5,
+    "fields": { "color_label": "Blue", "is_available": true }
+  },
+  {
+    "model": "goods.color",
+    "pk": 6,
+    "fields": { "color_label": "Grey", "is_available": true }
+  },
+  {
+    "model": "goods.color",
+    "pk": 7,
+    "fields": { "color_label": "Red", "is_available": true }
+  },
+  {
+    "model": "goods.color",
+    "pk": 8,
+    "fields": { "color_label": "Purple", "is_available": true }
+  },
+  {
+    "model": "goods.color",
+    "pk": 9,
+    "fields": { "color_label": "Red", "is_available": true }
+  },
+  {
+    "model": "goods.color",
+    "pk": 10,
+    "fields": { "color_label": "Purple", "is_available": true }
   }
 ]

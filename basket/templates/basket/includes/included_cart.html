@@ -2,10 +2,6 @@
 {% load basket_tags %}
 {% load url_search_tags %}
 {% find_search_url request as find_search %}
-{% if basket %}
-{% else %}
-    {% user_basket request as basket %}
-{% endif %}
 <div class="card mb-3 text-bg-light col-md-12 col-sm-12 col-lg-12 row"
      style="width:100%;
             padding-right:0;
