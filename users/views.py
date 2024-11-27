@@ -105,4 +105,5 @@ class LogoutView(RedirectView):  # С выходом из аккаунта на 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         auth.logout(request)
+        messages.success(request, "Успешный выход из аккаунта")
         return super().dispatch(request, *args, **kwargs)

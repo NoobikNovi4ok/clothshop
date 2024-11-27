@@ -8,11 +8,12 @@
   <div class="container">
     <h3 class="text-center">Создаем стиль</h3>
     {% if messages %}
-      <ul class="messages">
+      <div>
         {% for message in messages %}
-          <li class="alert alert-success fade show {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</li>
+          <div class="alert alert-success fade show {% if message.tags %}{{ message.tags }}{% endif %}"
+               id="message">{{ message }}</div>
         {% endfor %}
-      </ul>
+      </div>
     {% endif %}
     <div class="slider mb-2">
       <div>

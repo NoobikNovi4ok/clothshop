@@ -9,7 +9,8 @@
     <div class="container">
       {% if messages %}
         {% for message in messages %}
-          <div class="alert alert-success fade show {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+          <div class="alert alert-success fade show {% if message.tags %}{{ message.tags }}{% endif %}"
+               id="message">{{ message }}</div>
         {% endfor %}
       {% endif %}
       <div class="row mt-1">

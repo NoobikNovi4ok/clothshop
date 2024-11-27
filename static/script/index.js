@@ -4512,3 +4512,14 @@ $(document).on("input", ".number", function () {
     $(this).val("");
   }
 });
+
+$(document).ready(function () {
+  var $message = $("#message");
+  if ($message.length) {
+    setTimeout(function () {
+      $message.fadeOut(400, function () {
+        $(this).remove();
+      });
+    }, 5000); // 5000 milliseconds = 5 seconds
+  }
+});
