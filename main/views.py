@@ -10,8 +10,8 @@ class CatalogView(ListView):
     model = Cloths
     context_object_name = "cloths"
     template_name = "main/catalog.html"
-    paginate_by = 1
-    allow_empty = False
+    # paginate_by = 1
+    allow_empty = True
 
     def get_queryset(self):
         cloths = super().get_queryset().filter(quantity__gt=0).order_by("-pk")
@@ -38,7 +38,7 @@ class CatalogView(ListView):
         context["select_category"] = Categories.objects.filter(
             slug__in=context["get_slug_category"]
         )
-        context["selected_sort"] = self.request.GET.get("sort", "newest")
+        context["selected_sort"] = self.request.GET.getlist("sort", "newest")
         return context
 
 

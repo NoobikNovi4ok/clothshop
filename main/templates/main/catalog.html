@@ -54,7 +54,7 @@
                                 <input type="checkbox"
                                        name="sort"
                                        value="year"
-                                       {% if 'year' in request %}checked{% endif %}>
+                                       {% if 'year' in selected_sort %}checked{% endif %}>
                                 По году производства
                             </label>
                             <br>
@@ -63,7 +63,7 @@
                                 <input type="checkbox"
                                        name="sort"
                                        value="name"
-                                       {% if 'name' in request %}checked{% endif %}>
+                                       {% if 'name' in selected_sort %}checked{% endif %}>
                                 По наименованию
                             </label>
                             <br>
@@ -72,7 +72,7 @@
                                 <input type="checkbox"
                                        name="sort"
                                        value="price"
-                                       {% if 'price' in request %}checked{% endif %}>
+                                       {% if 'price' in selected_sort %}checked{% endif %}>
                                 По цене
                             </label>
                             <br>
@@ -106,22 +106,19 @@
                     </div>
                 </div>
                 <!-- Пагинация -->
-                <div class="pagination">
+                {% comment %} <div class="pagination">
                     <span class="step-links">
                         {% if page_obj.has_previous %}
                             <a href="?page=1" class="btn btn-outline-info">&laquo; Первая</a>
-                            <a href="?page={{ page_obj.previous_page_number }}{% if get_slug_category %}&category={{ get_slug_category|join:'&category=' }} {% endif %}"
-                               class="btn btn-outline-primary">Предыдущая</a>
+                            <a href="?page={{ page_obj.previous_page_number }}{% if get_slug_category %}&category={{ get_slug_category|join:'&category=' }} {% endif %}" class="btn btn-outline-primary">Предыдущая</a>
                         {% endif %}
                         <span class="current">Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.</span>
                         {% if page_obj.has_next %}
-                            <a href="?page={{ page_obj.next_page_number }}{% if get_slug_category %}&category={{ get_slug_category|join:'&category=' }} {% endif %}"
-                               class="btn btn-outline-primary">Следующая</a>
-                            <a href="?page={{ page_obj.paginator.num_pages }}{% if get_slug_category %} &category={{ get_slug_category|join:'&category=' }} {% endif %}"
-                               class="btn btn-outline-info">Последняя &raquo;</a>
+                            <a href="?page={{ page_obj.next_page_number }}{% if get_slug_category %}&category={{ get_slug_category|join:'&category=' }} {% endif %}" class="btn btn-outline-primary">Следующая</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}{% if get_slug_category %} &category={{ get_slug_category|join:'&category=' }} {% endif %}" class="btn btn-outline-info">Последняя &raquo;</a>
                         {% endif %}
                     </span>
-                </div>
+                </div> {% endcomment %}
             </div>
         </div>
         <script>
@@ -134,4 +131,4 @@
         });
     });
         </script>
-    {% endblock %}
+    {% endblock content %}

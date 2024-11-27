@@ -39,7 +39,7 @@
                     visibility:hidden"></div>
       </div>
     {% else %}
-      <a href="{% url 'user:login' %}?message=1" class="btn btn-outline-dark">В корзину</a>
+      <a href="{% url 'user:login' %}?next=need" class="btn btn-outline-dark">В корзину</a>
     {% endif %}
   </div>
 {% endblock %}

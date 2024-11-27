@@ -1,6 +1,6 @@
 from django.http import JsonResponse
-from django.template.loader import render_to_string
 from django.views import View
+from django.template.loader import render_to_string
 from basket.mixins import BasketMixin
 from basket.utils import get_user_basket
 from basket.models import Basket
