@@ -29,6 +29,7 @@ class OrderAdmin(admin.ModelAdmin):
         if obj.status == "Подтвержден":
             self.reduce_product_quantity(obj)
         elif obj.status == "Отменен" and not obj.cancellation_reason:
+            self.return_product_quantity(obj)
             obj.cancellation_reason = "Причина не указана"
 
         # Сохраняем объект
@@ -38,6 +39,12 @@ class OrderAdmin(admin.ModelAdmin):
         for item in order.orderitem_set.all():
             product = item.product
             product.quantity -= item.quantity
+            product.save()
+
+    def return_product_quantity(self, order):
+        for item in order.orderitem_set.all():
+            product = item.product
+            product.quantity += item.quantity
             product.save()
 
 

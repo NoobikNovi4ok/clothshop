@@ -45,7 +45,8 @@ class CreateOrderView(LoginRequiredMixin, FormView):
                                 price=price,
                                 quantity=quantity,
                             )
-
+                            # product.quantity -= quantity
+                            # product.save() #Для вычета до изменения статуса
                         cart_items.delete()
                         messages.success(self.request, "Заказ оформлен")
 
